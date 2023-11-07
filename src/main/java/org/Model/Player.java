@@ -14,19 +14,73 @@ import org.Utils.LogLevel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Player class handles the properties related a Player of the game and provide the features to change those properties.
+ */
 public class Player {
+    /**
+     * Color assigned to player would be used in rendering the players on Showmap part of the project
+     */
     private String d_color;
+
+    /**
+     * Name of the player
+     */
     private String d_playerName;
+
+    /**
+     * Contains the list of the country captured by Player
+     */
     List<Country> d_countryCaptured;
+
+    /**
+     * Contains the lsit of the continent captured by Player
+     */
     List<Continent> d_continentsOwned;
+
+    /**
+     * Stored order list , follows COMMAND PATTERN. Executed when the game goes to ORDER EXECUTION PHASE
+     */
     List<Order> d_orderList;
+
+    /**
+     * Keeps a count of the NUM OF ARMIES
+     */
     Integer d_numOfArmiesRemaining;
+
+    /**
+     * Keeps a track of the card assigned to player for a particular TURN
+     */
     List<String> d_cardsOwnedByPlayer  = new ArrayList<String>();
+
+    /**
+     * List of players the current player has used NEGOTIATE card against.
+     * Is useful when doing the ADVANCE operation as this list can be checked for avoiding the advance.
+     */
     List<Player> d_negotiatedPlayers = new ArrayList<Player>();
+
+    /**
+     * Temporary flag to keep track of the order input for a player in ISSUE ORDER PHASE
+     */
     Boolean d_moreOrdersFlag;
+
+    /**
+     * Flag to keep track of if card has been assigned to a Player.
+     * Because , it might happen that a player captures two territories in a single turn.
+     * But game requires we only provide single. This flag is used to toggle between true and false to keep track of
+     * the use case.
+     */
     Boolean d_cardAssignedForThisTurnFlag;
 
+    /**
+     * Default constructor
+     */
     public Player(){}
+
+    /**
+     * Parameterized constructor
+     * @param p_playerName : Name of the player
+     */
     public Player(String p_playerName){
         this.d_playerName = p_playerName;
         this.d_numOfArmiesRemaining = 0;
@@ -35,16 +89,71 @@ public class Player {
         this.d_moreOrdersFlag = true;
         this.d_cardAssignedForThisTurnFlag = false;
     }
+
+    /**
+     * Getter for the Player name data member
+     * @return d_playerName : Name of the player
+     */
     public String getPlayerName(){return this.d_playerName; }
+
+    /**
+     * Setter fo the player name data member
+     * @param p_playerName : Name of the player to be set
+     */
     public void setPlayerName(String p_playerName){this.d_playerName =  p_playerName; }
+
+    /**
+     * Gets the color assigned to Player
+     * @return d_color : the color string assigned to the Player
+     */
     public String getColor(){ return this.d_color; }
+
+    /**
+     * Sets the color assigned to the player
+     * @param p_color : the color string assigned to the player
+     */
     public void setColor(String p_color){ this.d_color = p_color; }
+
+    /**
+     * Returns the list of the country captured by player
+     * @return d_countryCaptured : List of the country captured  by player
+     */
     public List<Country> getCountryCaptured(){return this.d_countryCaptured; }
+
+    /**
+     * Sets the list of the country captured by player
+     * @param p_countryCaptured : List of the country to be set for a player
+     */
     public void setCountryCaptured(List<Country> p_countryCaptured){this.d_countryCaptured = p_countryCaptured; }
+
+    /**
+     * Getter to get the current state of the getMoreOrderFlag
+     * @return d_moreOrdersFlag
+     */
     public Boolean getMoreOrderFlag(){return this.d_moreOrdersFlag; }
+
+    /**
+     * Getter to get the current state of the cardAssignedForThisTurnFlag data member
+     * @return d_cardAssignedForThisTurnFlag
+     */
     public Boolean getCardAssignedForThisTurnFlag(){return this.d_cardAssignedForThisTurnFlag; }
+
+    /**
+     * setter for the d_cardAssignedForThisTurnFlag
+     * @param p_flag : The value to be set
+     */
     public void setCardAssignedForThisTurnFlag(Boolean p_flag){this.d_cardAssignedForThisTurnFlag = p_flag; }
+
+    /**
+     * Setter for the d_moreOrdersFlags
+     * @param p_moreOrders : the value to be set
+     */
     public void setMoreOrderFlag(Boolean p_moreOrders){this.d_moreOrdersFlag = p_moreOrders; }
+
+    /**
+     * Add a country to the list of country captured by player
+     * @param p_country : The country to be added.
+     */
     public void addCountryCaptured(Country p_country){
         if(this.d_countryCaptured == null) d_countryCaptured = new ArrayList<>();
         d_countryCaptured.add(p_country);
@@ -52,8 +161,23 @@ public class Player {
                 " --CAPTURED--> " + p_country.getCountryName());
     }
 
+    /**
+     * Getter to get the list of all players to which current player have negotiated to
+     * @return d_negotiatedPlayers : gets the value of data member of class d_negotiatedPlayers
+     */
     public List<Player> getAllNegotiatedPlayers(){ return this.d_negotiatedPlayers; }
+
+    /**
+     * Setter to get the list of all players to which current player have negotiated to
+     * @param p_negotiatedPlayers : sets the value of d_negotiatedPlayers to p_negotiatedPlayers
+     */
     public void setAllNegotiatedPlayers(List<Player> p_negotiatedPlayers){ this.d_negotiatedPlayers = p_negotiatedPlayers; }
+
+    /**
+     * Returns the player object , provided the name. With whom the current player has TRUCE with
+     * @param p_playerName : Name of the player contained in a string
+     * @return l_player : Returns a player object if the player is found in the negotiated list, if not found returns null.
+     */
     public Player getNegotiatedPlayerByName(String p_playerName){
         return d_negotiatedPlayers
                 .stream()
@@ -61,9 +185,21 @@ public class Player {
                 .findFirst()
                 .orElse(null);
     }
+
+    /**
+     * Add a player to d_negotiatedPLayers
+     * @param p_player : Object representing a player to be added to the negotiated list
+     */
     public void addNegotiatedPlayer(Player p_player){
         this.d_negotiatedPlayers.add(p_player);
     }
+
+    /**
+     * Check if the country to be attacked, if the current player has TRUCE with it.
+     * OR we can say, the country to be attacked is not owned by a player. With whom the current player has negotiated with.
+     * @param p_country : Name of the country for which it needs to be checked
+     * @return true / false : If country cannot be attacked returns TRUE or return FALSE
+     */
     public Boolean negotiationCheckForAttack(String p_country){
         for(Player l_player : d_negotiatedPlayers){
             if(l_player.getCapturedCountryByName(p_country) != null)
@@ -71,8 +207,18 @@ public class Player {
         }
         return false; // Can attack
     }
+
+    /**
+     * If the player has used the negotiate card, usually the d_negotiatedPlayers list will have an entry
+     * This entry needs to be cleared. When the turn ends. This function facilitates that.
+     */
     public void clearNegotiatedPlayers(){ d_negotiatedPlayers.clear(); }
 
+    /**
+     * Searching the list of the country by the country name and returns the country object representing particular country.
+     * @param p_countryName : Name of the country
+     * @return l_country , if the country is found, else returns NULL.
+     */
     public Country getCapturedCountryByName(String p_countryName){
         return d_countryCaptured
                 .stream()
@@ -81,6 +227,13 @@ public class Player {
                 .findFirst()
                 .orElse(null);
     }
+
+
+    /**
+     * Searching the list of the continent by the continent name and returns the continent object representing particular continent.
+     * @param p_continentName : Name of the continent
+     * @return l_continent , if the continent is found , else returns NULL.
+     */
     public Continent getCapturedContinentByName(String p_continentName){
         return d_continentsOwned
                 .stream()
@@ -89,20 +242,70 @@ public class Player {
                 .findFirst()
                 .orElse(null);
     }
+
+    /**
+     * Getter for the list of Continents owned by player
+     * @return d_continentOwned
+     */
     public List<Continent> getContinentOwned(){return this.d_continentsOwned;}
+
+    /**
+     * Adds the continent to the list of the Continent owned by player
+     * @param p_continent : Continent object to be added
+     */
     public void addContinentOwned(Continent p_continent){
         if(d_continentsOwned == null)
             d_continentsOwned = new ArrayList<>();
         d_continentsOwned.add(p_continent);
     }
+
+    /**
+     * Returns the list of not executed order of the player.
+     * @return d_orderList : list of not executed order
+     */
     public List<Order> getOrderList(){return this.d_orderList; }
+
+    /**
+     * Setter for the list of the not executed order.
+     * @param p_orderList : the list of orders to be set
+     */
     public void setOrderList(List<Order> p_orderList){ this.d_orderList = p_orderList; }
+
+    /**
+     * Getter for the number of reinforcement remaining with the player
+     * @return d_numOfArmiesRemaining :Stores the number of reinforcement for player
+     */
     public Integer getNumOfArmiesRemaining(){ return this.d_numOfArmiesRemaining; }
+
+    /**
+     * Setter for the number of reinforcement
+     * @param d_num : Number to be set
+     */
     public void setNumOfArmiesRemaining(Integer d_num){ this.d_numOfArmiesRemaining = d_num; }
+
+    /**
+     * Gets a list of cards assigned to player
+     * @return d_cardsOwnedByPlayer : List of string contains the cards held by player
+     */
     public List<String> getAllCards(){ return this.d_cardsOwnedByPlayer; }
+
+    /**
+     * Helper function for validation of armies to deploy
+     * @param p_numOfArmiesToDeploy : Number of armies player wants to deploy
+     * @return true or false : If validation is successful TRUE or else false
+     */
     private Boolean validateDeployOrderArmies(int p_numOfArmiesToDeploy){
         return p_numOfArmiesToDeploy <= this.d_numOfArmiesRemaining;
     }
+
+    /**
+     * Helper function to help in creation of the Deploy Order
+     * Stores the Deploy order in player based list called d_orderList
+     * Later executed in OrderExecutionPhase of the game.
+     * @param l_cmd : Command object which contains the deploy order string
+     * @throws InvalidCommand : Throws InvalidCommand if the command provided by user is wrong
+     * @throws InvalidState : If player doesn't have enough reinforcement to continue with the deployment
+     */
     public void createDeployOrder(Command l_cmd) throws InvalidCommand, InvalidState {
         String l_targetCountry;
         Integer l_noOfArmies;
@@ -127,6 +330,14 @@ public class Player {
         }
 
     }
+
+    /**
+     * Helper function to help in creation of the Advance Order
+     * Stores the Advance order in player based list called d_orderList
+     * Later executed in OrderExecutionPhase of the game.
+     * @param l_cmd : Command object which contains the advance order string
+     * @throws InvalidCommand : Throws InvalidCommand if the command provided by user is wrong
+    */
     public void createAdvanceOrder(Command l_cmd,GameState p_currentGameState) throws InvalidCommand {
             Country l_sourceCountry = p_currentGameState.getCurrentMap().getCountryByName(l_cmd.handleAdvanceArmies().get(0));
             Country l_defendingCountry = p_currentGameState.getCurrentMap().getCountryByName(l_cmd.handleAdvanceArmies().get(1));
@@ -145,15 +356,23 @@ public class Player {
                 GameController.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order failed");
                 System.out.println("Invalid advance order provided");
             }
-
-
-
     }
+
+    /**
+     * Function as specified by build document which stores the order to the top of the order list according to COMMAND
+     * PATTERN design.
+     * @param d_order : Command object which contains the order needed for execution
+     */
     public void issue_order(Order d_order){
         if(this.d_orderList == null)
             d_orderList = new ArrayList<Order>();
         this.d_orderList.add(d_order);
     }
+
+    /**
+     * Function as specified by build document which returns the order required for execution
+     * @return l_order : The order needed for execution
+     */
     public Order next_order(){
         if(d_orderList == null || d_orderList.isEmpty())
             return null;

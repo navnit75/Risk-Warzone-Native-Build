@@ -175,6 +175,7 @@ public class StartUpPhase extends Phase{
                 07. validatemap
                 08. gameplayer -add playername -remove playername
                 09. assigncountries
+                10. loadmap
                 """);
     }
 

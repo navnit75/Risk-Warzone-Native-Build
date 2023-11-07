@@ -2,6 +2,9 @@ package org.Constants;
 
 import java.util.*;
 
+/**
+ * Constants of the file which should be initialized during the runtime of the Game.
+ */
 public class AllTheConstants {
 
     public static final HashSet<String> allMapCommands = new HashSet<>(Arrays.asList("editcontinent","editcountry",

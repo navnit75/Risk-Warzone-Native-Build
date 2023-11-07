@@ -38,7 +38,7 @@ public class IssueOrderPhase extends Phase{
         String l_commandEntered = d_scanner.nextLine();
         commandHandler(l_commandEntered,p_player);
     }
-    public void orderAcceptingBlock(){
+    public void orderAcceptingBlock() throws InvalidState{
         do {
                 for (Player l_player : d_currentGameState.getPlayerController().getAllPlayers()) {
                     if (l_player.getMoreOrderFlag() && !l_player.getPlayerName().equals("Neutral")) {
