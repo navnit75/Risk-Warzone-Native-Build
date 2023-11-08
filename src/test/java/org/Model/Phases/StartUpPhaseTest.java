@@ -1,6 +1,6 @@
 package org.Model.Phases;
 
-import org.Controller.GameController;
+import org.Controller.GameEngine;
 import org.Exceptions.InvalidCommand;
 import org.Exceptions.InvalidState;
 import org.Exceptions.MapInvalidException;
@@ -19,16 +19,16 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class StartUpPhaseTest {
-    GameController d_gameController;
+    GameEngine d_gameEngine;
     GameState d_gameState;
     Phase d_phase;
 
     @Before
     public void beforeStartUpPhaseTest(){
-        d_gameController = new GameController();
+        d_gameEngine = new GameEngine();
         d_gameState = new GameState();
-        d_phase = new StartUpPhase(d_gameController,d_gameState);
-        GameController.setLoggerContext("testLog.txt");
+        d_phase = new StartUpPhase(d_gameEngine,d_gameState);
+        GameEngine.setLoggerContext("testLog.txt");
     }
 
     @Test
@@ -70,13 +70,13 @@ public class StartUpPhaseTest {
         Command l_playerCommand  = new Command("gameplayer -add p1 -add p2");
         Command l_loadMapCommand  = new Command("loadmap canada.map");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
             GameState d_gameStateNew = new GameState();
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameStateNew);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameStateNew);
             d_newPhase.performLoadMap(l_loadMapCommand,null);
             d_newPhase.performCreatePlayers(l_playerCommand, null);
 
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Boolean checkCondition =

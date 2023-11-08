@@ -4,17 +4,28 @@ import org.Model.*;
 import org.Utils.LogLevel;
 import org.Views.MapView;
 
-import java.awt.font.GlyphMetrics;
 import java.util.*;
 
 /**
- * Class to keep the global operation required on the
- * Player class
+ * Class to keep the global operation required on players to be kept at one single location
  */
 public class PlayerController {
+    /**
+     * List of all players playing in the game
+     */
     private List<Player> d_allPlayers = new ArrayList<>();
+
+    /**
+     * Function to get all the players of the game
+     * @return d_allPlayers : Returns all the players of the game
+     */
     public List<Player> getAllPlayers(){return this.d_allPlayers;}
 
+    /**
+     * Validity check for checking if the player exists
+     * @param p_playerName : String player name of the player for checking validity
+     * @return True or False based on if player exist in the game.
+     */
     public boolean checkIfPlayerAlreadyExist(String p_playerName){
         if(d_allPlayers.isEmpty())
             return false;
@@ -26,22 +37,32 @@ public class PlayerController {
         }
         return false;
     }
+
+    /**
+     * Gets the player object by the string value of the player name
+     * @param p_playerName : String player name
+     * @return Player object if the player exists or return null;
+     */
     public Player getPlayerByName(String p_playerName){
-        if(d_allPlayers.isEmpty()){
-            return null;
-        } else {
-            for(Player d_player : d_allPlayers){
-                if(d_player.getPlayerName().equalsIgnoreCase(p_playerName))
-                    return d_player;
-            }
-        }
-        return null;
+        return d_allPlayers
+                .stream()
+                .filter(l_player->l_player.getPlayerName().equalsIgnoreCase(p_playerName))
+                .findFirst()
+                .orElse(null);
     }
 
+    /**
+     * Adding a player to the game by providing the Player object
+     * @param p_player : Player object to be added to the game
+     */
     public void addPlayer(Player p_player){
         this.d_allPlayers.add(p_player);
     }
 
+    /**
+     * Command handling function for player adding and removing Players.
+     * @param p_command : Command object created for the command.
+     */
     public void addRemovePlayers(HashMap<String,ArrayList<String>> p_command){
         List<String> l_allAddOperations = p_command.get("add");
         List<String> l_allRemoveOperations = p_command.get("remove");
@@ -50,7 +71,7 @@ public class PlayerController {
             if(!this.checkIfPlayerAlreadyExist(p_name)){
                 d_allPlayers.add(new Player(p_name));
                 System.out.println("Player " + p_name + " added.");
-                GameController.log("PlayerController::addRemovePlayers", LogLevel.BASICLOG,"Player " + p_name + " added.");
+                GameEngine.log("PlayerController::addRemovePlayers", LogLevel.BASICLOG,"Player " + p_name + " added.");
             }
         }
 
@@ -60,44 +81,61 @@ public class PlayerController {
                 if(l_removePlayer != null) {
                     d_allPlayers.remove(l_removePlayer);
                     System.out.println("Player " + p_name + " removed.");
-                    GameController.log("PlayerController::addRemovePlayers", LogLevel.BASICLOG,"Player " + p_name + " removed.");
+                    GameEngine.log("PlayerController::addRemovePlayers", LogLevel.BASICLOG,"Player " + p_name + " removed.");
                 } else {
                     System.out.println("Player " + p_name + " doesn't exist.");
-                    GameController.log("PlayerController::addRemovePlayers",LogLevel.BASICLOG,"Player " + p_name + " doesn't exist");
+                    GameEngine.log("PlayerController::addRemovePlayers",LogLevel.BASICLOG,"Player " + p_name + " doesn't exist");
                 }
             }
         }
     }
 
+    /**
+     * Helper function to add continents to the list of captured continent of the player , according to the countries
+     * captured.
+     * @param p_player : Player on whose countries this operation will take place.
+     * @param p_gameState : Gamestate of the game.
+     */
     public void updateContinents(Player p_player, GameState p_gameState){
         for(Continent l_continent : p_gameState.getCurrentMap().getAllContinentsList()){
             List<Country> l_countriesOwned = p_player.getCountryCaptured();
             if(new HashSet<>(l_countriesOwned).containsAll(l_continent.getCountries())){
                 p_player.addContinentOwned(l_continent);
-                GameController.log("PlayerController::updateContinents",LogLevel.BASICLOG,
+                GameEngine.log("PlayerController::updateContinents",LogLevel.BASICLOG,
                         p_player.getPlayerName() + "->" + l_continent.getContinentName());
             }
         }
     }
 
+    /**
+     * Helper function to assign colors to each of the player.
+     */
     private void assignColors(){
         if(this.d_allPlayers != null){
             int l_numOfColors = AllTheConstants.COLORS.size();
             for(int i = 0 ; i < d_allPlayers.size() ; i++){
                 d_allPlayers.get(i).setColor(AllTheConstants.COLORS.get(i % l_numOfColors));
-                GameController.log("PlayerController::assignColors",LogLevel.BASICLOG,
+                GameEngine.log("PlayerController::assignColors",LogLevel.BASICLOG,
                         d_allPlayers.get(i).getPlayerName() + " is assigned color : " + d_allPlayers.get(i).getColor());
             }
         }
     }
 
 
-
+    /**
+     * Helper function to render the assigned countries to a player
+     * @param p_gameState : Current gamestate of the main running game.
+     */
     public void showPlayerAssignedCountry(GameState p_gameState){
         MapView l_tempView = new MapView(p_gameState);
         l_tempView.showPlayerBasedCountries();
     }
 
+    /**
+     * Handles the assigncountries command from users.
+     * And assigns random country to each of the player.
+     * @param p_gameState : Current game state of the Game.
+     */
     public void assignCountries(GameState p_gameState){
        List<Country> l_countryList = new ArrayList<>(p_gameState.getCurrentMap().getAllCountriesAsList());
        Collections.shuffle(l_countryList);
@@ -109,7 +147,7 @@ public class PlayerController {
                if(l_countryIndex == l_countriesCount)
                    break;
                l_player.addCountryCaptured(l_countryList.get(l_countryIndex));
-               GameController.log("PlayerController::assignCountries",LogLevel.BASICLOG,
+               GameEngine.log("PlayerController::assignCountries",LogLevel.BASICLOG,
                        l_player.getPlayerName() + "->" + l_countryList.get(l_countryIndex).getCountryName());
                ++l_countryIndex;
            }
@@ -125,6 +163,11 @@ public class PlayerController {
 
     }
 
+    /**
+     * Calculates reinforcement to be provided to  the players , after each turn.
+     * @param p_player : For player whose reinforcement number has to be decided.
+     * @return Integer : The number of reinforcement .
+     */
     public Integer calculateArmiesForPlayer(Player p_player) {
         Integer l_armies = null != p_player.getNumOfArmiesRemaining() ? p_player.getNumOfArmiesRemaining() : 0;
 
@@ -138,7 +181,7 @@ public class PlayerController {
             }
             l_armies = l_armies + l_continentCtrlValue;
         }
-        GameController.log("PlayerController::calculateArmiesForPlayer",LogLevel.BASICLOG,
+        GameEngine.log("PlayerController::calculateArmiesForPlayer",LogLevel.BASICLOG,
                 p_player.getPlayerName() + " has been assigned " + l_armies);
         return l_armies;
     }
@@ -152,12 +195,20 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Checks if the getMoreOrderFlag of any one of the player is set
+     * @return True or False
+     */
     public Boolean checkForMoreOrders(){
         return d_allPlayers
                 .stream()
                 .anyMatch(Player::getMoreOrderFlag);
     }
 
+    /**
+     * If any of the Players have unexecuted orders left for a particular turn
+     * @return True or Falsef
+     */
     public Boolean ordersRemaining(){
         return d_allPlayers
                 .stream()
@@ -167,6 +218,9 @@ public class PlayerController {
                 );
     }
 
+    /**
+     * Use to reset the player flag after each turn.
+     */
     public void resetPlayerFlag(){
         for(Player l_player : d_allPlayers){
             if(!l_player.getPlayerName().equals("Neutral")) {
@@ -175,18 +229,9 @@ public class PlayerController {
             }
             l_player.setCardAssignedForThisTurnFlag(false);
             l_player.clearNegotiatedPlayers();
-            GameController.log("PlayerController::resetPlayerFlag", LogLevel.BASICLOG,
+            GameEngine.log("PlayerController::resetPlayerFlag", LogLevel.BASICLOG,
                     l_player.getPlayerName() + " flags are reset ");
         }
 
     }
-
-    public Player findPlayerByName(String p_playerName){
-        return d_allPlayers
-                .stream()
-                .filter(l_player->l_player.getPlayerName().equals(p_playerName))
-                .findFirst()
-                .orElse(null);
-    }
-
 }

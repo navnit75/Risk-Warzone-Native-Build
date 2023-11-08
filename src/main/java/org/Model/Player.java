@@ -1,7 +1,7 @@
 package org.Model;
 
 import org.Constants.AllTheConstants;
-import org.Controller.GameController;
+import org.Controller.GameEngine;
 import org.Exceptions.InvalidCommand;
 import org.Exceptions.InvalidState;
 import org.Model.Orders.Advance;
@@ -157,7 +157,7 @@ public class Player {
     public void addCountryCaptured(Country p_country){
         if(this.d_countryCaptured == null) d_countryCaptured = new ArrayList<>();
         d_countryCaptured.add(p_country);
-        GameController.log("Player::addCountryCaptured",LogLevel.BASICLOG,d_playerName +
+        GameEngine.log("Player::addCountryCaptured",LogLevel.BASICLOG,d_playerName +
                 " --CAPTURED--> " + p_country.getCountryName());
     }
 
@@ -313,9 +313,9 @@ public class Player {
         l_targetCountry = l_cmd.handleDeployArmies().get(0);
         l_noOfArmies = Integer.parseInt(l_cmd.handleDeployArmies().get(1));
         if (!validateDeployOrderArmies(l_noOfArmies)) {
-            GameController.log("Player::createDeployOrder", LogLevel.BASICLOG,"Deploy order starting " +
+            GameEngine.log("Player::createDeployOrder", LogLevel.BASICLOG,"Deploy order starting " +
                     "validation failed");
-            GameController.log("Player::createDeployOrder", LogLevel.BASICLOG,"Num of Reinforcement" +
+            GameEngine.log("Player::createDeployOrder", LogLevel.BASICLOG,"Num of Reinforcement" +
                         " Player has " + this.getNumOfArmiesRemaining() + " Num of armies in the order : " + l_noOfArmies);
             System.out.println("Given deploy order cant be executed as armies in deploy order exceeds player's" +
                         " unallocated armies.");
@@ -324,7 +324,7 @@ public class Player {
             Integer l_unallocatedarmies = d_numOfArmiesRemaining - l_noOfArmies;
             this.issue_order(new Deploy(this, l_targetCountry,l_noOfArmies));
             this.setNumOfArmiesRemaining(l_unallocatedarmies);
-            GameController.log("Player::createDeployOrder", LogLevel.BASICLOG,"Deploy order object" +
+            GameEngine.log("Player::createDeployOrder", LogLevel.BASICLOG,"Deploy order object" +
                     " created and ready for execution" +
                     " Reinforcement Armies : " + l_unallocatedarmies);
         }
@@ -347,13 +347,13 @@ public class Player {
                     (l_numOfArmies >= 0) && (l_sourceCountry.hasNeighbour(l_defendingCountry));
             if (l_preValidityCheck) {
                 issue_order(new Advance(this, l_sourceCountry, l_defendingCountry, l_numOfArmies));
-                GameController.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order object" +
+                GameEngine.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order object" +
                         " created and ready for execution" +
                         " Advancing Armies  : " + l_numOfArmies +
                         " From : " + l_sourceCountry.getCountryName() +
                         " To : " + l_defendingCountry.getCountryName());
             } else {
-                GameController.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order failed");
+                GameEngine.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order failed");
                 System.out.println("Invalid advance order provided");
             }
     }
@@ -381,38 +381,56 @@ public class Player {
         return l_order;
 
     }
+
+    /**
+     * Assign random cards to player according to the turn.
+     * @param p_gameState : Gamestate object for various common function.
+     */
     public void assignCard(GameState p_gameState){
         int l_numOfCards = AllTheConstants.CARDS.size();
         int l_cardIndex = p_gameState.getRandomInteger(l_numOfCards,0);
         if(!d_cardAssignedForThisTurnFlag){
             this.d_cardsOwnedByPlayer.add(AllTheConstants.CARDS.get(l_cardIndex));
-            GameController.log("Player::assignCard",LogLevel.BASICLOG,
+            GameEngine.log("Player::assignCard",LogLevel.BASICLOG,
                     this.d_playerName + " has been assigned " +
                     "Card : " + AllTheConstants.CARDS.get(l_cardIndex));
             setCardAssignedForThisTurnFlag(true);
         } else {
-            GameController.log("Player::assignCard",LogLevel.BASICLOG,
+            GameEngine.log("Player::assignCard",LogLevel.BASICLOG,
                     this.d_playerName + " has CAPTURED but not assigned with card" +
                     " as he has already been assigned card in this turn");
         }
     }
+
+    /**
+     * Remove card from the player , list of cards.
+     * @param p_card : The card which needs to be removed
+     */
     public void removeCard(String p_card){
         this.d_cardsOwnedByPlayer.remove(p_card);
-        GameController.log("Player::removeCard",LogLevel.BASICLOG,
+        GameEngine.log("Player::removeCard",LogLevel.BASICLOG,
                 this.d_playerName + " has used : " + p_card);
     }
+
+    /**
+     * Function to create an Airlift based order and later using issue_order for adding the order to the players order list
+     * @param l_cmd : Command object which has store the command issued from player
+     * @param p_gameState : Gamestate object specifying the current state of the game
+     * @throws InvalidCommand : If the command is invalid , the exception is raised
+     * @throws InvalidState : If the countries provided is invalid , InvalidState exception is raised.
+     */
     public void createAirliftOrderCard(Command l_cmd, GameState p_gameState) throws InvalidCommand, InvalidState {
         Country l_sourceCountry = p_gameState.getCurrentMap().getCountryByName(l_cmd.handleAirliftCommand().get(0));
         Country l_targetCountry = p_gameState.getCurrentMap().getCountryByName(l_cmd.handleAirliftCommand().get(1));
         Integer l_numOfArmies = Integer.parseInt(l_cmd.handleAirliftCommand().get(2));
         if(l_sourceCountry == null || l_targetCountry == null){
-            GameController.log("Player::createAirliftOrder",LogLevel.BASICLOG," Invalid Airlift Order provided");
+            GameEngine.log("Player::createAirliftOrder",LogLevel.BASICLOG," Invalid Airlift Order provided");
             throw new InvalidState("Airlift countries doesn't exist");
 
         } else {
             Card l_newCard = new Airlift(this, l_sourceCountry,l_targetCountry,l_numOfArmies);
             if(l_newCard.validateCommand(p_gameState)){
-                GameController.log("Player::createAirliftOrder",LogLevel.BASICLOG," Airlift order object " +
+                GameEngine.log("Player::createAirliftOrder",LogLevel.BASICLOG," Airlift order object " +
                         " created and ready for execution" +
                         " Source Country : " + l_sourceCountry.getCountryName() +
                         " Target Country : " + l_targetCountry.getCountryName() +
@@ -422,17 +440,24 @@ public class Player {
         }
     }
 
+    /**
+     * Function to create  Bloackade based order and later using issue_order for adding the order to the players order list
+     * @param l_cmd : Command object which has store the command issued from player
+     * @param p_gameState : Gamestate object specifying the current state of the game
+     * @throws InvalidCommand : If the command is invalid , the exception is raised
+     * @throws InvalidState : If the countries provided is invalid , InvalidState exception is raised.
+     */
     public void createBlockadeOrderCard(Command l_cmd, GameState p_gameState) throws InvalidCommand, InvalidState {
         Country l_country = p_gameState.getCurrentMap().getCountryByName(l_cmd.handleBlockadeCommand());
         if(l_country == null){
-            GameController.log("Player::createBlockadeOrder",LogLevel.BASICLOG," Invalid Blockade Order" +
+            GameEngine.log("Player::createBlockadeOrder",LogLevel.BASICLOG," Invalid Blockade Order" +
                     " country doesn't exist");
             throw new InvalidState("Country doesn't exist");
 
         } else {
             Card l_newCard = new Blockade(this, l_country);
             if(l_newCard.validateCommand(p_gameState)) {
-                GameController.log("Player::createBlockadeOrder", LogLevel.BASICLOG, " Blockade order object " +
+                GameEngine.log("Player::createBlockadeOrder", LogLevel.BASICLOG, " Blockade order object " +
                         " created and ready for execution" +
                         " Blockade Country : " + l_country.getCountryName());
                 issue_order(l_newCard);
@@ -440,16 +465,23 @@ public class Player {
         }
     }
 
+    /**
+     * Function to create Bomb based order and later using issue_order for adding the order to the players order list
+     * @param l_cmd : Command object which has store the command issued from player
+     * @param p_gameState : Gamestate object specifying the current state of the game
+     * @throws InvalidCommand : If the command is invalid , the exception is raised
+     * @throws InvalidState : If the countries provided is invalid , InvalidState exception is raised.
+     */
     public void createBombOrderCard(Command l_cmd, GameState p_gameState) throws InvalidCommand, InvalidState {
         Country l_country = p_gameState.getCurrentMap().getCountryByName(l_cmd.handleBombCommand());
         if(l_country == null){
-            GameController.log("Player::createBombOrder", LogLevel.BASICLOG,"Invalid Bomb Order" +
+            GameEngine.log("Player::createBombOrder", LogLevel.BASICLOG,"Invalid Bomb Order" +
                     "Country " + l_cmd.handleBombCommand() + " doesn't exist");
             throw new InvalidState("To be Bombed " + l_cmd.handleBombCommand() + "country doesn't exist.");
         } else {
             Card l_newCard = new Bomb(this, l_country);
             if(l_newCard.validateCommand(p_gameState)){
-                GameController.log("Player::createBombOrder", LogLevel.BASICLOG, " Bomb order object " +
+                GameEngine.log("Player::createBombOrder", LogLevel.BASICLOG, " Bomb order object " +
                         " created and ready for execution" +
                         " Bombed Country : " + l_country.getCountryName());
                 issue_order(l_newCard);
@@ -457,6 +489,13 @@ public class Player {
         }
     }
 
+    /**
+     * Function to create  Negotiate based order and later using issue_order for adding the order to the players order list
+     * @param l_cmd : Command object which has store the command issued from player
+     * @param p_gameState : Gamestate object specifying the current state of the game
+     * @throws InvalidCommand : If the command is invalid , the exception is raised
+     * @throws InvalidState : If the countries provided is invalid , InvalidState exception is raised.
+     */
     public void createNegotiateOrderCard(Command l_cmd, GameState p_gameState) throws InvalidCommand, InvalidState {
         Player p_player1 = this;
         Player p_player2 = p_gameState.getPlayerController().getPlayerByName(l_cmd.handleNegotiateCommand());
@@ -466,7 +505,7 @@ public class Player {
         } else {
             Card l_newCard = new Negotiate(p_player1,p_player2);
             if(l_newCard.validateCommand(p_gameState)){
-                GameController.log("Player::createNegotiateOrderCard", LogLevel.BASICLOG,
+                GameEngine.log("Player::createNegotiateOrderCard", LogLevel.BASICLOG,
                         " Negotiate order object created and ready for execution" +
                         " Card Owner : " + p_player1.getPlayerName() +
                         " Negotiated With : " + p_player2.getPlayerName());
@@ -475,6 +514,13 @@ public class Player {
         }
     }
 
+    /**
+     * Function to create any Card based order and later using issue_order for adding the order to the players order list
+     * @param l_cmd : Command object which has store the command issued from player
+     * @param p_gameState : Gamestate object specifying the current state of the game
+     * @throws InvalidCommand : If the command is invalid , the exception is raised
+     * @throws InvalidState : If the countries provided is invalid , InvalidState exception is raised.
+     */
     public void createCardOrder(Command l_cmd , GameState p_gameState) throws InvalidCommand, InvalidState{
         switch(l_cmd.getMainOperation()){
             case "airlift":{
@@ -494,7 +540,7 @@ public class Player {
                 break;
             }
             default:{
-                GameController.log("Player::createCardOrder", LogLevel.BASICLOG,
+                GameEngine.log("Player::createCardOrder", LogLevel.BASICLOG,
                         "Invalid Card Provided." + l_cmd.getMainOperation());
                 throw new InvalidState("Invalid Card Provided.");
             }

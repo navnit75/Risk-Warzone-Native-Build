@@ -10,14 +10,33 @@ import java.nio.file.StandardOpenOption;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Log writer class basically defines an observer which is subscribed to an Observable
+ * Follows the OBSERVER PATTERN design
+ */
 public class LogWriter implements Observer {
+    /**
+     * Keeps the log file
+     */
     private String d_logFile;
 
+    /**
+     * Setter for the log file
+     * @param p_fileName
+     */
     public LogWriter(String p_fileName){
         d_logFile = p_fileName;
     }
+
+    /**
+     * Flag use for clearing the file, before adding the log at the start of the game.
+     */
     private boolean clearLogFileFlag = false;
 
+    /**
+     * Log file may contain the log from previous run
+     * This function clears the file before adding the current run logs
+     */
     public void clearLogFileFromLastRun(){
         if(clearLogFileFlag == false) {
             try {
@@ -34,6 +53,9 @@ public class LogWriter implements Observer {
         }
     }
 
+    /**
+     * This function is called anytime observable state changes , according to the OBSERVER PATTERN
+     */
     public void update(Observable o, Object arg) {
         clearLogFileFromLastRun();
         LogEntryBuffer l_logMessage = (LogEntryBuffer)o;

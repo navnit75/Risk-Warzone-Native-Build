@@ -298,6 +298,9 @@ public class MapView {
         }
     }
 
+    /**
+     * This method displays the colored string of the countries assigned to each player
+     */
     public void showPlayerBasedCountries(){
         if(d_players != null){
             for(Player l_player : d_players){

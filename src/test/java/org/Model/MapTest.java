@@ -1,7 +1,6 @@
 package org.Model;
 
-import org.Constants.AllTheConstants;
-import org.Controller.GameController;
+import org.Controller.GameEngine;
 import org.Exceptions.MapInvalidException;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +12,8 @@ public class MapTest {
 
     @Before
     public void beforeMapTest(){
-        GameController l_gameController = new GameController();
-        GameController.setLoggerContext("testLog.txt");
+        GameEngine l_gameEngine = new GameEngine();
+        GameEngine.setLoggerContext("testLog.txt");
         d_map = new Map();
     }
 

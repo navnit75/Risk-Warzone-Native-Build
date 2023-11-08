@@ -1,6 +1,6 @@
 package org.Model.Phases;
 
-import org.Controller.GameController;
+import org.Controller.GameEngine;
 import org.Model.Country;
 import org.Model.GameState;
 import org.Model.Player;
@@ -12,17 +12,17 @@ import static org.mockito.Mockito.*;
 
 public class IssueOrderPhaseTest {
 
-    GameController d_gameController;
+    GameEngine d_gameEngine;
     GameState d_gameState;
     Phase d_startUpPhase, d_issueOrderPhase;
 
     @Before
     public void setUp() throws Exception {
-        d_gameController = new GameController();
+        d_gameEngine = new GameEngine();
         d_gameState = new GameState();
-        d_startUpPhase = new StartUpPhase(d_gameController,d_gameState);
-        d_issueOrderPhase = new IssueOrderPhase(d_gameController,d_gameState);
-        GameController.setLoggerContext("testLog.txt");
+        d_startUpPhase = new StartUpPhase(d_gameEngine,d_gameState);
+        d_issueOrderPhase = new IssueOrderPhase(d_gameEngine,d_gameState);
+        GameEngine.setLoggerContext("testLog.txt");
     }
 
     @Test
@@ -30,11 +30,11 @@ public class IssueOrderPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -55,11 +55,11 @@ public class IssueOrderPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -97,11 +97,11 @@ public class IssueOrderPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -140,11 +140,11 @@ public class IssueOrderPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -183,11 +183,11 @@ public class IssueOrderPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -207,11 +207,11 @@ public class IssueOrderPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");

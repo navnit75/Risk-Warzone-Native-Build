@@ -2,216 +2,265 @@
 ******************************************************************************************
                         [StartUpPhase : initPhase] :Start Up Phase                        
 ******************************************************************************************
-[StartUpPhase::initPhase] :Command Entered "loadmap europe.map"
+[StartUpPhase::initPhase] :Command Entered "loadmap canada.map"
 
 *********************[StartUpPhase::peformLoadMap] :MAP section starts*******************
-[Map::addContinent] :East_Europe added to the GameState.
-[Map::addContinent] :South_Europe added to the GameState.
-[Map::addContinent] :West_Europe added to the GameState.
-[Map::addCountry] :England added to the GameState
-[Map::addCountry] :Scotland added to the GameState
-[Map::addCountry] :N_Ireland added to the GameState
-[Map::addCountry] :Rep_Ireland added to the GameState
-[Map::addCountry] :Wales added to the GameState
-[Map::addCountry] :Belgum added to the GameState
-[Map::addCountry] :Netherlands added to the GameState
-[Map::addCountry] :Denmark added to the GameState
-[Map::addCountry] :Germany added to the GameState
-[Map::addCountry] :Poland added to the GameState
-[Map::addCountry] :Czech_Rep added to the GameState
-[Map::addCountry] :Slovakia added to the GameState
-[Map::addCountry] :Hungary added to the GameState
-[Map::addCountry] :Austria added to the GameState
-[Map::addCountry] :Switzerland added to the GameState
-[Map::addCountry] :Italy added to the GameState
-[Map::addCountry] :Sicily added to the GameState
-[Map::addCountry] :Sardinia added to the GameState
-[Map::addCountry] :Corsica added to the GameState
-[Map::addCountry] :Majorca added to the GameState
-[Map::addCountry] :France added to the GameState
-[Map::addCountry] :Spain added to the GameState
-[Map::addCountry] :Portugal added to the GameState
-[Map::addCountry] :Luxembourg added to the GameState
-[Map::addNeighbour] :Denmark is added as neighbour of England
-[Map::addNeighbour] :France is added as neighbour of England
-[Map::addNeighbour] :Belgum is added as neighbour of England
-[Map::addNeighbour] :Netherlands is added as neighbour of England
-[Map::addNeighbour] :Wales is added as neighbour of England
-[Map::addNeighbour] :Scotland is added as neighbour of England
-[Map::addNeighbour] :N_Ireland is added as neighbour of England
-[Map::addNeighbour] :Rep_Ireland is added as neighbour of England
-[Map::addNeighbour] :Denmark is added as neighbour of Scotland
-[Country::addNeighbour] :1 is already neighbour of Scotland
-[Country::addNeighbour] :2 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of Scotland
-[Map::addNeighbour] :N_Ireland is added as neighbour of Scotland
-[Country::addNeighbour] :1 is already neighbour of N_Ireland
-[Country::addNeighbour] :3 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of N_Ireland
-[Country::addNeighbour] :2 is already neighbour of N_Ireland
-[Country::addNeighbour] :3 is already neighbour of Scotland
-[Map::addNeighbour] :Scotland is added as neighbour of N_Ireland
-[Map::addNeighbour] :Spain is added as neighbour of Rep_Ireland
-[Country::addNeighbour] :1 is already neighbour of Rep_Ireland
-[Country::addNeighbour] :4 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of Rep_Ireland
-[Map::addNeighbour] :Wales is added as neighbour of Rep_Ireland
-[Country::addNeighbour] :1 is already neighbour of Wales
-[Country::addNeighbour] :5 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of Wales
-[Country::addNeighbour] :4 is already neighbour of Wales
-[Country::addNeighbour] :5 is already neighbour of Rep_Ireland
-[Map::addNeighbour] :Rep_Ireland is added as neighbour of Wales
-[Map::addNeighbour] :Germany is added as neighbour of Belgum
-[Map::addNeighbour] :France is added as neighbour of Belgum
-[Map::addNeighbour] :Luxembourg is added as neighbour of Belgum
-[Map::addNeighbour] :Netherlands is added as neighbour of Belgum
-[Country::addNeighbour] :1 is already neighbour of Belgum
-[Country::addNeighbour] :6 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of Belgum
-[Map::addNeighbour] :Germany is added as neighbour of Netherlands
-[Country::addNeighbour] :6 is already neighbour of Netherlands
-[Country::addNeighbour] :7 is already neighbour of Belgum
-[Map::addNeighbour] :Belgum is added as neighbour of Netherlands
-[Country::addNeighbour] :1 is already neighbour of Netherlands
-[Country::addNeighbour] :7 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of Netherlands
-[Map::addNeighbour] :Poland is added as neighbour of Denmark
-[Map::addNeighbour] :Germany is added as neighbour of Denmark
-[Country::addNeighbour] :2 is already neighbour of Denmark
-[Country::addNeighbour] :8 is already neighbour of Scotland
-[Map::addNeighbour] :Scotland is added as neighbour of Denmark
-[Country::addNeighbour] :1 is already neighbour of Denmark
-[Country::addNeighbour] :8 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of Denmark
-[Map::addNeighbour] :Switzerland is added as neighbour of Germany
-[Map::addNeighbour] :Austria is added as neighbour of Germany
-[Map::addNeighbour] :Czech_Rep is added as neighbour of Germany
-[Map::addNeighbour] :Poland is added as neighbour of Germany
-[Country::addNeighbour] :8 is already neighbour of Germany
-[Country::addNeighbour] :9 is already neighbour of Denmark
-[Map::addNeighbour] :Denmark is added as neighbour of Germany
-[Country::addNeighbour] :7 is already neighbour of Germany
-[Country::addNeighbour] :9 is already neighbour of Netherlands
-[Map::addNeighbour] :Netherlands is added as neighbour of Germany
-[Country::addNeighbour] :6 is already neighbour of Germany
-[Country::addNeighbour] :9 is already neighbour of Belgum
-[Map::addNeighbour] :Belgum is added as neighbour of Germany
-[Map::addNeighbour] :Luxembourg is added as neighbour of Germany
-[Map::addNeighbour] :Slovakia is added as neighbour of Poland
-[Map::addNeighbour] :Czech_Rep is added as neighbour of Poland
-[Country::addNeighbour] :8 is already neighbour of Poland
-[Country::addNeighbour] :10 is already neighbour of Denmark
-[Map::addNeighbour] :Denmark is added as neighbour of Poland
-[Country::addNeighbour] :9 is already neighbour of Poland
-[Country::addNeighbour] :10 is already neighbour of Germany
-[Map::addNeighbour] :Germany is added as neighbour of Poland
-[Map::addNeighbour] :Austria is added as neighbour of Czech_Rep
-[Map::addNeighbour] :Slovakia is added as neighbour of Czech_Rep
-[Country::addNeighbour] :9 is already neighbour of Czech_Rep
-[Country::addNeighbour] :11 is already neighbour of Germany
-[Map::addNeighbour] :Germany is added as neighbour of Czech_Rep
-[Country::addNeighbour] :10 is already neighbour of Czech_Rep
-[Country::addNeighbour] :11 is already neighbour of Poland
-[Map::addNeighbour] :Poland is added as neighbour of Czech_Rep
-[Map::addNeighbour] :Austria is added as neighbour of Slovakia
-[Map::addNeighbour] :Hungary is added as neighbour of Slovakia
-[Country::addNeighbour] :10 is already neighbour of Slovakia
-[Country::addNeighbour] :12 is already neighbour of Poland
-[Map::addNeighbour] :Poland is added as neighbour of Slovakia
-[Country::addNeighbour] :11 is already neighbour of Slovakia
-[Country::addNeighbour] :12 is already neighbour of Czech_Rep
-[Map::addNeighbour] :Czech_Rep is added as neighbour of Slovakia
-[Map::addNeighbour] :Austria is added as neighbour of Hungary
-[Country::addNeighbour] :12 is already neighbour of Hungary
-[Country::addNeighbour] :13 is already neighbour of Slovakia
-[Map::addNeighbour] :Slovakia is added as neighbour of Hungary
-[Map::addNeighbour] :Italy is added as neighbour of Austria
-[Map::addNeighbour] :Switzerland is added as neighbour of Austria
-[Country::addNeighbour] :13 is already neighbour of Austria
-[Country::addNeighbour] :14 is already neighbour of Hungary
-[Map::addNeighbour] :Hungary is added as neighbour of Austria
-[Country::addNeighbour] :9 is already neighbour of Austria
-[Country::addNeighbour] :14 is already neighbour of Germany
-[Map::addNeighbour] :Germany is added as neighbour of Austria
-[Country::addNeighbour] :11 is already neighbour of Austria
-[Country::addNeighbour] :14 is already neighbour of Czech_Rep
-[Map::addNeighbour] :Czech_Rep is added as neighbour of Austria
-[Country::addNeighbour] :12 is already neighbour of Austria
-[Country::addNeighbour] :14 is already neighbour of Slovakia
-[Map::addNeighbour] :Slovakia is added as neighbour of Austria
-[Map::addNeighbour] :Italy is added as neighbour of Switzerland
-[Country::addNeighbour] :14 is already neighbour of Switzerland
-[Country::addNeighbour] :15 is already neighbour of Austria
-[Map::addNeighbour] :Austria is added as neighbour of Switzerland
-[Country::addNeighbour] :9 is already neighbour of Switzerland
-[Country::addNeighbour] :15 is already neighbour of Germany
-[Map::addNeighbour] :Germany is added as neighbour of Switzerland
-[Map::addNeighbour] :France is added as neighbour of Switzerland
-[Map::addNeighbour] :Sardinia is added as neighbour of Italy
-[Map::addNeighbour] :Sicily is added as neighbour of Italy
-[Country::addNeighbour] :15 is already neighbour of Italy
-[Country::addNeighbour] :16 is already neighbour of Switzerland
-[Map::addNeighbour] :Switzerland is added as neighbour of Italy
-[Country::addNeighbour] :14 is already neighbour of Italy
-[Country::addNeighbour] :16 is already neighbour of Austria
-[Map::addNeighbour] :Austria is added as neighbour of Italy
-[Map::addNeighbour] :Sardinia is added as neighbour of Sicily
-[Country::addNeighbour] :16 is already neighbour of Sicily
-[Country::addNeighbour] :17 is already neighbour of Italy
-[Map::addNeighbour] :Italy is added as neighbour of Sicily
-[Map::addNeighbour] :Majorca is added as neighbour of Sardinia
-[Country::addNeighbour] :17 is already neighbour of Sardinia
-[Country::addNeighbour] :18 is already neighbour of Sicily
-[Map::addNeighbour] :Sicily is added as neighbour of Sardinia
-[Map::addNeighbour] :Corsica is added as neighbour of Sardinia
-[Country::addNeighbour] :16 is already neighbour of Sardinia
-[Country::addNeighbour] :18 is already neighbour of Italy
-[Map::addNeighbour] :Italy is added as neighbour of Sardinia
-[Map::addNeighbour] :Majorca is added as neighbour of Corsica
-[Country::addNeighbour] :18 is already neighbour of Corsica
-[Country::addNeighbour] :19 is already neighbour of Sardinia
-[Map::addNeighbour] :Sardinia is added as neighbour of Corsica
-[Map::addNeighbour] :Spain is added as neighbour of Majorca
-[Country::addNeighbour] :19 is already neighbour of Majorca
-[Country::addNeighbour] :20 is already neighbour of Corsica
-[Map::addNeighbour] :Corsica is added as neighbour of Majorca
-[Country::addNeighbour] :18 is already neighbour of Majorca
-[Country::addNeighbour] :20 is already neighbour of Sardinia
-[Map::addNeighbour] :Sardinia is added as neighbour of Majorca
-[Map::addNeighbour] :Spain is added as neighbour of France
-[Country::addNeighbour] :15 is already neighbour of France
-[Country::addNeighbour] :21 is already neighbour of Switzerland
-[Map::addNeighbour] :Switzerland is added as neighbour of France
-[Map::addNeighbour] :Luxembourg is added as neighbour of France
-[Country::addNeighbour] :6 is already neighbour of France
-[Country::addNeighbour] :21 is already neighbour of Belgum
-[Map::addNeighbour] :Belgum is added as neighbour of France
-[Country::addNeighbour] :1 is already neighbour of France
-[Country::addNeighbour] :21 is already neighbour of England
-[Map::addNeighbour] :England is added as neighbour of France
-[Map::addNeighbour] :Portugal is added as neighbour of Spain
-[Country::addNeighbour] :4 is already neighbour of Spain
-[Country::addNeighbour] :22 is already neighbour of Rep_Ireland
-[Map::addNeighbour] :Rep_Ireland is added as neighbour of Spain
-[Country::addNeighbour] :20 is already neighbour of Spain
-[Country::addNeighbour] :22 is already neighbour of Majorca
-[Map::addNeighbour] :Majorca is added as neighbour of Spain
-[Country::addNeighbour] :21 is already neighbour of Spain
-[Country::addNeighbour] :22 is already neighbour of France
-[Map::addNeighbour] :France is added as neighbour of Spain
-[Country::addNeighbour] :22 is already neighbour of Portugal
-[Country::addNeighbour] :23 is already neighbour of Spain
-[Map::addNeighbour] :Spain is added as neighbour of Portugal
-[Country::addNeighbour] :9 is already neighbour of Luxembourg
-[Country::addNeighbour] :24 is already neighbour of Germany
-[Map::addNeighbour] :Germany is added as neighbour of Luxembourg
-[Country::addNeighbour] :21 is already neighbour of Luxembourg
-[Country::addNeighbour] :24 is already neighbour of France
-[Map::addNeighbour] :France is added as neighbour of Luxembourg
-[Country::addNeighbour] :6 is already neighbour of Luxembourg
-[Country::addNeighbour] :24 is already neighbour of Belgum
-[Map::addNeighbour] :Belgum is added as neighbour of Luxembourg
+[Map::addContinent] :Ontario_and_Quebec added to the GameState.
+[Map::addContinent] :Western_Provinces-South added to the GameState.
+[Map::addContinent] :Western_Provinces-North added to the GameState.
+[Map::addContinent] :Nunavut added to the GameState.
+[Map::addContinent] :Northwestern_Territories added to the GameState.
+[Map::addCountry] :New_Brunswick added to the GameState
+[Map::addCountry] :Prince_Edward_Island added to the GameState
+[Map::addCountry] :Nova_Scotia added to the GameState
+[Map::addCountry] :N&L-Newfoundland added to the GameState
+[Map::addCountry] :N&L-Labrador added to the GameState
+[Map::addCountry] :Quebec-North added to the GameState
+[Map::addCountry] :Quebec-Central added to the GameState
+[Map::addCountry] :Quebec-South added to the GameState
+[Map::addCountry] :Ontario-South added to the GameState
+[Map::addCountry] :Ontario-West added to the GameState
+[Map::addCountry] :Ontario-North added to the GameState
+[Map::addCountry] :Manitoba-South added to the GameState
+[Map::addCountry] :Saskatchewan-South added to the GameState
+[Map::addCountry] :Alberta-South added to the GameState
+[Map::addCountry] :British_Columbia-South added to the GameState
+[Map::addCountry] :BC-Vancouver_Island added to the GameState
+[Map::addCountry] :British_Columbia-North added to the GameState
+[Map::addCountry] :Alberta-North added to the GameState
+[Map::addCountry] :Saskatchewan-North added to the GameState
+[Map::addCountry] :Manitoba-North added to the GameState
+[Map::addCountry] :Nunavut-Continental added to the GameState
+[Map::addCountry] :NU-Southern_Islands added to the GameState
+[Map::addCountry] :NU-Baffin_Island added to the GameState
+[Map::addCountry] :NU-Victoria_Island-East added to the GameState
+[Map::addCountry] :NU-Northern_Islands added to the GameState
+[Map::addCountry] :NU-Ellesmere_Island added to the GameState
+[Map::addCountry] :NT-Northern_Islands added to the GameState
+[Map::addCountry] :NT-Banks_Island added to the GameState
+[Map::addCountry] :NT-Victoria_Island-West added to the GameState
+[Map::addCountry] :Northwest_Territories-Continental added to the GameState
+[Map::addCountry] :Yukon_Territory added to the GameState
+[Map::addNeighbour] :Quebec-South is added as neighbour of New_Brunswick
+[Map::addNeighbour] :Prince_Edward_Island is added as neighbour of New_Brunswick
+[Map::addNeighbour] :Nova_Scotia is added as neighbour of New_Brunswick
+[Country::addNeighbour] :1 is already neighbour of Prince_Edward_Island
+[Country::addNeighbour] :2 is already neighbour of New_Brunswick
+[Map::addNeighbour] :New_Brunswick is added as neighbour of Prince_Edward_Island
+[Map::addNeighbour] :Nova_Scotia is added as neighbour of Prince_Edward_Island
+[Country::addNeighbour] :1 is already neighbour of Nova_Scotia
+[Country::addNeighbour] :3 is already neighbour of New_Brunswick
+[Map::addNeighbour] :New_Brunswick is added as neighbour of Nova_Scotia
+[Country::addNeighbour] :2 is already neighbour of Nova_Scotia
+[Country::addNeighbour] :3 is already neighbour of Prince_Edward_Island
+[Map::addNeighbour] :Prince_Edward_Island is added as neighbour of Nova_Scotia
+[Map::addNeighbour] :N&L-Newfoundland is added as neighbour of Nova_Scotia
+[Country::addNeighbour] :3 is already neighbour of N&L-Newfoundland
+[Country::addNeighbour] :4 is already neighbour of Nova_Scotia
+[Map::addNeighbour] :Nova_Scotia is added as neighbour of N&L-Newfoundland
+[Map::addNeighbour] :N&L-Labrador is added as neighbour of N&L-Newfoundland
+[Map::addNeighbour] :Quebec-Central is added as neighbour of N&L-Newfoundland
+[Country::addNeighbour] :4 is already neighbour of N&L-Labrador
+[Country::addNeighbour] :5 is already neighbour of N&L-Newfoundland
+[Map::addNeighbour] :N&L-Newfoundland is added as neighbour of N&L-Labrador
+[Map::addNeighbour] :Quebec-Central is added as neighbour of N&L-Labrador
+[Map::addNeighbour] :Quebec-North is added as neighbour of N&L-Labrador
+[Country::addNeighbour] :5 is already neighbour of Quebec-North
+[Country::addNeighbour] :6 is already neighbour of N&L-Labrador
+[Map::addNeighbour] :N&L-Labrador is added as neighbour of Quebec-North
+[Map::addNeighbour] :Quebec-Central is added as neighbour of Quebec-North
+[Map::addNeighbour] :NU-Southern_Islands is added as neighbour of Quebec-North
+[Map::addNeighbour] :NU-Baffin_Island is added as neighbour of Quebec-North
+[Country::addNeighbour] :4 is already neighbour of Quebec-Central
+[Country::addNeighbour] :7 is already neighbour of N&L-Newfoundland
+[Map::addNeighbour] :N&L-Newfoundland is added as neighbour of Quebec-Central
+[Country::addNeighbour] :5 is already neighbour of Quebec-Central
+[Country::addNeighbour] :7 is already neighbour of N&L-Labrador
+[Map::addNeighbour] :N&L-Labrador is added as neighbour of Quebec-Central
+[Country::addNeighbour] :6 is already neighbour of Quebec-Central
+[Country::addNeighbour] :7 is already neighbour of Quebec-North
+[Map::addNeighbour] :Quebec-North is added as neighbour of Quebec-Central
+[Map::addNeighbour] :Quebec-South is added as neighbour of Quebec-Central
+[Map::addNeighbour] :Ontario-North is added as neighbour of Quebec-Central
+[Country::addNeighbour] :1 is already neighbour of Quebec-South
+[Country::addNeighbour] :8 is already neighbour of New_Brunswick
+[Map::addNeighbour] :New_Brunswick is added as neighbour of Quebec-South
+[Country::addNeighbour] :7 is already neighbour of Quebec-South
+[Country::addNeighbour] :8 is already neighbour of Quebec-Central
+[Map::addNeighbour] :Quebec-Central is added as neighbour of Quebec-South
+[Map::addNeighbour] :Ontario-South is added as neighbour of Quebec-South
+[Country::addNeighbour] :8 is already neighbour of Ontario-South
+[Country::addNeighbour] :9 is already neighbour of Quebec-South
+[Map::addNeighbour] :Quebec-South is added as neighbour of Ontario-South
+[Map::addNeighbour] :Ontario-North is added as neighbour of Ontario-South
+[Map::addNeighbour] :Ontario-West is added as neighbour of Ontario-South
+[Country::addNeighbour] :9 is already neighbour of Ontario-West
+[Country::addNeighbour] :10 is already neighbour of Ontario-South
+[Map::addNeighbour] :Ontario-South is added as neighbour of Ontario-West
+[Map::addNeighbour] :Ontario-North is added as neighbour of Ontario-West
+[Map::addNeighbour] :Manitoba-South is added as neighbour of Ontario-West
+[Country::addNeighbour] :7 is already neighbour of Ontario-North
+[Country::addNeighbour] :11 is already neighbour of Quebec-Central
+[Map::addNeighbour] :Quebec-Central is added as neighbour of Ontario-North
+[Country::addNeighbour] :9 is already neighbour of Ontario-North
+[Country::addNeighbour] :11 is already neighbour of Ontario-South
+[Map::addNeighbour] :Ontario-South is added as neighbour of Ontario-North
+[Country::addNeighbour] :10 is already neighbour of Ontario-North
+[Country::addNeighbour] :11 is already neighbour of Ontario-West
+[Map::addNeighbour] :Ontario-West is added as neighbour of Ontario-North
+[Map::addNeighbour] :Manitoba-North is added as neighbour of Ontario-North
+[Map::addNeighbour] :NU-Southern_Islands is added as neighbour of Ontario-North
+[Country::addNeighbour] :10 is already neighbour of Manitoba-South
+[Country::addNeighbour] :12 is already neighbour of Ontario-West
+[Map::addNeighbour] :Ontario-West is added as neighbour of Manitoba-South
+[Map::addNeighbour] :Saskatchewan-South is added as neighbour of Manitoba-South
+[Map::addNeighbour] :Manitoba-North is added as neighbour of Manitoba-South
+[Country::addNeighbour] :12 is already neighbour of Saskatchewan-South
+[Country::addNeighbour] :13 is already neighbour of Manitoba-South
+[Map::addNeighbour] :Manitoba-South is added as neighbour of Saskatchewan-South
+[Map::addNeighbour] :Saskatchewan-North is added as neighbour of Saskatchewan-South
+[Map::addNeighbour] :Alberta-South is added as neighbour of Saskatchewan-South
+[Country::addNeighbour] :13 is already neighbour of Alberta-South
+[Country::addNeighbour] :14 is already neighbour of Saskatchewan-South
+[Map::addNeighbour] :Saskatchewan-South is added as neighbour of Alberta-South
+[Map::addNeighbour] :Alberta-North is added as neighbour of Alberta-South
+[Map::addNeighbour] :British_Columbia-South is added as neighbour of Alberta-South
+[Country::addNeighbour] :14 is already neighbour of British_Columbia-South
+[Country::addNeighbour] :15 is already neighbour of Alberta-South
+[Map::addNeighbour] :Alberta-South is added as neighbour of British_Columbia-South
+[Map::addNeighbour] :BC-Vancouver_Island is added as neighbour of British_Columbia-South
+[Map::addNeighbour] :British_Columbia-North is added as neighbour of British_Columbia-South
+[Country::addNeighbour] :15 is already neighbour of BC-Vancouver_Island
+[Country::addNeighbour] :16 is already neighbour of British_Columbia-South
+[Map::addNeighbour] :British_Columbia-South is added as neighbour of BC-Vancouver_Island
+[Country::addNeighbour] :15 is already neighbour of British_Columbia-North
+[Country::addNeighbour] :17 is already neighbour of British_Columbia-South
+[Map::addNeighbour] :British_Columbia-South is added as neighbour of British_Columbia-North
+[Map::addNeighbour] :Yukon_Territory is added as neighbour of British_Columbia-North
+[Map::addNeighbour] :Northwest_Territories-Continental is added as neighbour of British_Columbia-North
+[Map::addNeighbour] :Alberta-North is added as neighbour of British_Columbia-North
+[Country::addNeighbour] :14 is already neighbour of Alberta-North
+[Country::addNeighbour] :18 is already neighbour of Alberta-South
+[Map::addNeighbour] :Alberta-South is added as neighbour of Alberta-North
+[Country::addNeighbour] :17 is already neighbour of Alberta-North
+[Country::addNeighbour] :18 is already neighbour of British_Columbia-North
+[Map::addNeighbour] :British_Columbia-North is added as neighbour of Alberta-North
+[Map::addNeighbour] :Saskatchewan-North is added as neighbour of Alberta-North
+[Map::addNeighbour] :Northwest_Territories-Continental is added as neighbour of Alberta-North
+[Country::addNeighbour] :13 is already neighbour of Saskatchewan-North
+[Country::addNeighbour] :19 is already neighbour of Saskatchewan-South
+[Map::addNeighbour] :Saskatchewan-South is added as neighbour of Saskatchewan-North
+[Country::addNeighbour] :18 is already neighbour of Saskatchewan-North
+[Country::addNeighbour] :19 is already neighbour of Alberta-North
+[Map::addNeighbour] :Alberta-North is added as neighbour of Saskatchewan-North
+[Map::addNeighbour] :Manitoba-North is added as neighbour of Saskatchewan-North
+[Map::addNeighbour] :Northwest_Territories-Continental is added as neighbour of Saskatchewan-North
+[Country::addNeighbour] :11 is already neighbour of Manitoba-North
+[Country::addNeighbour] :20 is already neighbour of Ontario-North
+[Map::addNeighbour] :Ontario-North is added as neighbour of Manitoba-North
+[Country::addNeighbour] :12 is already neighbour of Manitoba-North
+[Country::addNeighbour] :20 is already neighbour of Manitoba-South
+[Map::addNeighbour] :Manitoba-South is added as neighbour of Manitoba-North
+[Country::addNeighbour] :19 is already neighbour of Manitoba-North
+[Country::addNeighbour] :20 is already neighbour of Saskatchewan-North
+[Map::addNeighbour] :Saskatchewan-North is added as neighbour of Manitoba-North
+[Map::addNeighbour] :Nunavut-Continental is added as neighbour of Manitoba-North
+[Country::addNeighbour] :20 is already neighbour of Nunavut-Continental
+[Country::addNeighbour] :21 is already neighbour of Manitoba-North
+[Map::addNeighbour] :Manitoba-North is added as neighbour of Nunavut-Continental
+[Map::addNeighbour] :NU-Southern_Islands is added as neighbour of Nunavut-Continental
+[Map::addNeighbour] :NU-Baffin_Island is added as neighbour of Nunavut-Continental
+[Map::addNeighbour] :NU-Victoria_Island-East is added as neighbour of Nunavut-Continental
+[Map::addNeighbour] :NU-Northern_Islands is added as neighbour of Nunavut-Continental
+[Map::addNeighbour] :Northwest_Territories-Continental is added as neighbour of Nunavut-Continental
+[Country::addNeighbour] :6 is already neighbour of NU-Southern_Islands
+[Country::addNeighbour] :22 is already neighbour of Quebec-North
+[Map::addNeighbour] :Quebec-North is added as neighbour of NU-Southern_Islands
+[Country::addNeighbour] :11 is already neighbour of NU-Southern_Islands
+[Country::addNeighbour] :22 is already neighbour of Ontario-North
+[Map::addNeighbour] :Ontario-North is added as neighbour of NU-Southern_Islands
+[Country::addNeighbour] :21 is already neighbour of NU-Southern_Islands
+[Country::addNeighbour] :22 is already neighbour of Nunavut-Continental
+[Map::addNeighbour] :Nunavut-Continental is added as neighbour of NU-Southern_Islands
+[Map::addNeighbour] :NU-Baffin_Island is added as neighbour of NU-Southern_Islands
+[Country::addNeighbour] :6 is already neighbour of NU-Baffin_Island
+[Country::addNeighbour] :23 is already neighbour of Quebec-North
+[Map::addNeighbour] :Quebec-North is added as neighbour of NU-Baffin_Island
+[Country::addNeighbour] :21 is already neighbour of NU-Baffin_Island
+[Country::addNeighbour] :23 is already neighbour of Nunavut-Continental
+[Map::addNeighbour] :Nunavut-Continental is added as neighbour of NU-Baffin_Island
+[Country::addNeighbour] :22 is already neighbour of NU-Baffin_Island
+[Country::addNeighbour] :23 is already neighbour of NU-Southern_Islands
+[Map::addNeighbour] :NU-Southern_Islands is added as neighbour of NU-Baffin_Island
+[Map::addNeighbour] :NU-Ellesmere_Island is added as neighbour of NU-Baffin_Island
+[Map::addNeighbour] :NU-Northern_Islands is added as neighbour of NU-Baffin_Island
+[Country::addNeighbour] :21 is already neighbour of NU-Victoria_Island-East
+[Country::addNeighbour] :24 is already neighbour of Nunavut-Continental
+[Map::addNeighbour] :Nunavut-Continental is added as neighbour of NU-Victoria_Island-East
+[Map::addNeighbour] :NU-Northern_Islands is added as neighbour of NU-Victoria_Island-East
+[Map::addNeighbour] :NT-Victoria_Island-West is added as neighbour of NU-Victoria_Island-East
+[Country::addNeighbour] :21 is already neighbour of NU-Northern_Islands
+[Country::addNeighbour] :25 is already neighbour of Nunavut-Continental
+[Map::addNeighbour] :Nunavut-Continental is added as neighbour of NU-Northern_Islands
+[Country::addNeighbour] :23 is already neighbour of NU-Northern_Islands
+[Country::addNeighbour] :25 is already neighbour of NU-Baffin_Island
+[Map::addNeighbour] :NU-Baffin_Island is added as neighbour of NU-Northern_Islands
+[Country::addNeighbour] :24 is already neighbour of NU-Northern_Islands
+[Country::addNeighbour] :25 is already neighbour of NU-Victoria_Island-East
+[Map::addNeighbour] :NU-Victoria_Island-East is added as neighbour of NU-Northern_Islands
+[Map::addNeighbour] :NU-Ellesmere_Island is added as neighbour of NU-Northern_Islands
+[Map::addNeighbour] :NT-Northern_Islands is added as neighbour of NU-Northern_Islands
+[Country::addNeighbour] :23 is already neighbour of NU-Ellesmere_Island
+[Country::addNeighbour] :26 is already neighbour of NU-Baffin_Island
+[Map::addNeighbour] :NU-Baffin_Island is added as neighbour of NU-Ellesmere_Island
+[Country::addNeighbour] :25 is already neighbour of NU-Ellesmere_Island
+[Country::addNeighbour] :26 is already neighbour of NU-Northern_Islands
+[Map::addNeighbour] :NU-Northern_Islands is added as neighbour of NU-Ellesmere_Island
+[Country::addNeighbour] :25 is already neighbour of NT-Northern_Islands
+[Country::addNeighbour] :27 is already neighbour of NU-Northern_Islands
+[Map::addNeighbour] :NU-Northern_Islands is added as neighbour of NT-Northern_Islands
+[Map::addNeighbour] :NT-Banks_Island is added as neighbour of NT-Northern_Islands
+[Map::addNeighbour] :NT-Victoria_Island-West is added as neighbour of NT-Northern_Islands
+[Country::addNeighbour] :27 is already neighbour of NT-Banks_Island
+[Country::addNeighbour] :28 is already neighbour of NT-Northern_Islands
+[Map::addNeighbour] :NT-Northern_Islands is added as neighbour of NT-Banks_Island
+[Map::addNeighbour] :NT-Victoria_Island-West is added as neighbour of NT-Banks_Island
+[Map::addNeighbour] :Northwest_Territories-Continental is added as neighbour of NT-Banks_Island
+[Country::addNeighbour] :24 is already neighbour of NT-Victoria_Island-West
+[Country::addNeighbour] :29 is already neighbour of NU-Victoria_Island-East
+[Map::addNeighbour] :NU-Victoria_Island-East is added as neighbour of NT-Victoria_Island-West
+[Country::addNeighbour] :27 is already neighbour of NT-Victoria_Island-West
+[Country::addNeighbour] :29 is already neighbour of NT-Northern_Islands
+[Map::addNeighbour] :NT-Northern_Islands is added as neighbour of NT-Victoria_Island-West
+[Country::addNeighbour] :28 is already neighbour of NT-Victoria_Island-West
+[Country::addNeighbour] :29 is already neighbour of NT-Banks_Island
+[Map::addNeighbour] :NT-Banks_Island is added as neighbour of NT-Victoria_Island-West
+[Map::addNeighbour] :Northwest_Territories-Continental is added as neighbour of NT-Victoria_Island-West
+[Country::addNeighbour] :17 is already neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :30 is already neighbour of British_Columbia-North
+[Map::addNeighbour] :British_Columbia-North is added as neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :18 is already neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :30 is already neighbour of Alberta-North
+[Map::addNeighbour] :Alberta-North is added as neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :19 is already neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :30 is already neighbour of Saskatchewan-North
+[Map::addNeighbour] :Saskatchewan-North is added as neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :21 is already neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :30 is already neighbour of Nunavut-Continental
+[Map::addNeighbour] :Nunavut-Continental is added as neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :28 is already neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :30 is already neighbour of NT-Banks_Island
+[Map::addNeighbour] :NT-Banks_Island is added as neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :29 is already neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :30 is already neighbour of NT-Victoria_Island-West
+[Map::addNeighbour] :NT-Victoria_Island-West is added as neighbour of Northwest_Territories-Continental
+[Map::addNeighbour] :Yukon_Territory is added as neighbour of Northwest_Territories-Continental
+[Country::addNeighbour] :17 is already neighbour of Yukon_Territory
+[Country::addNeighbour] :31 is already neighbour of British_Columbia-North
+[Map::addNeighbour] :British_Columbia-North is added as neighbour of Yukon_Territory
+[Country::addNeighbour] :30 is already neighbour of Yukon_Territory
+[Country::addNeighbour] :31 is already neighbour of Northwest_Territories-Continental
+[Map::addNeighbour] :Northwest_Territories-Continental is added as neighbour of Yukon_Territory
 [Map::loadmap] :Map is loaded successfully.
 [StartUpPhase::initPhase] :Command Entered "gameplayer -add p1 -add p2"
 
@@ -219,58 +268,73 @@
 [PlayerController::addRemovePlayers] :Player p1 added.
 [PlayerController::addRemovePlayers] :Player p2 added.
 [StartUpPhase::initPhase] :Command Entered "assigncountries"
-[Player::addCountryCaptured] :p1 --CAPTURED--> Portugal
-[PlayerController::assignCountries] :p1->Portugal
-[Player::addCountryCaptured] :p2 --CAPTURED--> Czech_Rep
-[PlayerController::assignCountries] :p2->Czech_Rep
-[Player::addCountryCaptured] :p1 --CAPTURED--> Poland
-[PlayerController::assignCountries] :p1->Poland
-[Player::addCountryCaptured] :p2 --CAPTURED--> Germany
-[PlayerController::assignCountries] :p2->Germany
-[Player::addCountryCaptured] :p1 --CAPTURED--> Sicily
-[PlayerController::assignCountries] :p1->Sicily
-[Player::addCountryCaptured] :p2 --CAPTURED--> Wales
-[PlayerController::assignCountries] :p2->Wales
-[Player::addCountryCaptured] :p1 --CAPTURED--> Luxembourg
-[PlayerController::assignCountries] :p1->Luxembourg
-[Player::addCountryCaptured] :p2 --CAPTURED--> Spain
-[PlayerController::assignCountries] :p2->Spain
-[Player::addCountryCaptured] :p1 --CAPTURED--> Rep_Ireland
-[PlayerController::assignCountries] :p1->Rep_Ireland
-[Player::addCountryCaptured] :p2 --CAPTURED--> Austria
-[PlayerController::assignCountries] :p2->Austria
-[Player::addCountryCaptured] :p1 --CAPTURED--> Belgum
-[PlayerController::assignCountries] :p1->Belgum
-[Player::addCountryCaptured] :p2 --CAPTURED--> England
-[PlayerController::assignCountries] :p2->England
-[Player::addCountryCaptured] :p1 --CAPTURED--> N_Ireland
-[PlayerController::assignCountries] :p1->N_Ireland
-[Player::addCountryCaptured] :p2 --CAPTURED--> Denmark
-[PlayerController::assignCountries] :p2->Denmark
-[Player::addCountryCaptured] :p1 --CAPTURED--> Scotland
-[PlayerController::assignCountries] :p1->Scotland
-[Player::addCountryCaptured] :p2 --CAPTURED--> Sardinia
-[PlayerController::assignCountries] :p2->Sardinia
-[Player::addCountryCaptured] :p1 --CAPTURED--> Hungary
-[PlayerController::assignCountries] :p1->Hungary
-[Player::addCountryCaptured] :p2 --CAPTURED--> Netherlands
-[PlayerController::assignCountries] :p2->Netherlands
-[Player::addCountryCaptured] :p1 --CAPTURED--> Switzerland
-[PlayerController::assignCountries] :p1->Switzerland
-[Player::addCountryCaptured] :p2 --CAPTURED--> Slovakia
-[PlayerController::assignCountries] :p2->Slovakia
-[Player::addCountryCaptured] :p1 --CAPTURED--> Corsica
-[PlayerController::assignCountries] :p1->Corsica
-[Player::addCountryCaptured] :p2 --CAPTURED--> France
-[PlayerController::assignCountries] :p2->France
-[Player::addCountryCaptured] :p1 --CAPTURED--> Italy
-[PlayerController::assignCountries] :p1->Italy
-[Player::addCountryCaptured] :p2 --CAPTURED--> Majorca
-[PlayerController::assignCountries] :p2->Majorca
+[Player::addCountryCaptured] :p1 --CAPTURED--> Saskatchewan-South
+[PlayerController::assignCountries] :p1->Saskatchewan-South
+[Player::addCountryCaptured] :p2 --CAPTURED--> NU-Southern_Islands
+[PlayerController::assignCountries] :p2->NU-Southern_Islands
+[Player::addCountryCaptured] :p1 --CAPTURED--> Manitoba-North
+[PlayerController::assignCountries] :p1->Manitoba-North
+[Player::addCountryCaptured] :p2 --CAPTURED--> Ontario-South
+[PlayerController::assignCountries] :p2->Ontario-South
+[Player::addCountryCaptured] :p1 --CAPTURED--> Saskatchewan-North
+[PlayerController::assignCountries] :p1->Saskatchewan-North
+[Player::addCountryCaptured] :p2 --CAPTURED--> New_Brunswick
+[PlayerController::assignCountries] :p2->New_Brunswick
+[Player::addCountryCaptured] :p1 --CAPTURED--> Alberta-North
+[PlayerController::assignCountries] :p1->Alberta-North
+[Player::addCountryCaptured] :p2 --CAPTURED--> Quebec-Central
+[PlayerController::assignCountries] :p2->Quebec-Central
+[Player::addCountryCaptured] :p1 --CAPTURED--> Yukon_Territory
+[PlayerController::assignCountries] :p1->Yukon_Territory
+[Player::addCountryCaptured] :p2 --CAPTURED--> NU-Northern_Islands
+[PlayerController::assignCountries] :p2->NU-Northern_Islands
+[Player::addCountryCaptured] :p1 --CAPTURED--> N&L-Newfoundland
+[PlayerController::assignCountries] :p1->N&L-Newfoundland
+[Player::addCountryCaptured] :p2 --CAPTURED--> Nova_Scotia
+[PlayerController::assignCountries] :p2->Nova_Scotia
+[Player::addCountryCaptured] :p1 --CAPTURED--> NT-Banks_Island
+[PlayerController::assignCountries] :p1->NT-Banks_Island
+[Player::addCountryCaptured] :p2 --CAPTURED--> Quebec-North
+[PlayerController::assignCountries] :p2->Quebec-North
+[Player::addCountryCaptured] :p1 --CAPTURED--> British_Columbia-North
+[PlayerController::assignCountries] :p1->British_Columbia-North
+[Player::addCountryCaptured] :p2 --CAPTURED--> Ontario-West
+[PlayerController::assignCountries] :p2->Ontario-West
+[Player::addCountryCaptured] :p1 --CAPTURED--> NU-Baffin_Island
+[PlayerController::assignCountries] :p1->NU-Baffin_Island
+[Player::addCountryCaptured] :p2 --CAPTURED--> Northwest_Territories-Continental
+[PlayerController::assignCountries] :p2->Northwest_Territories-Continental
+[Player::addCountryCaptured] :p1 --CAPTURED--> NT-Victoria_Island-West
+[PlayerController::assignCountries] :p1->NT-Victoria_Island-West
+[Player::addCountryCaptured] :p2 --CAPTURED--> NU-Victoria_Island-East
+[PlayerController::assignCountries] :p2->NU-Victoria_Island-East
+[Player::addCountryCaptured] :p1 --CAPTURED--> NT-Northern_Islands
+[PlayerController::assignCountries] :p1->NT-Northern_Islands
+[Player::addCountryCaptured] :p2 --CAPTURED--> BC-Vancouver_Island
+[PlayerController::assignCountries] :p2->BC-Vancouver_Island
+[Player::addCountryCaptured] :p1 --CAPTURED--> Alberta-South
+[PlayerController::assignCountries] :p1->Alberta-South
+[Player::addCountryCaptured] :p2 --CAPTURED--> Nunavut-Continental
+[PlayerController::assignCountries] :p2->Nunavut-Continental
+[Player::addCountryCaptured] :p1 --CAPTURED--> NU-Ellesmere_Island
+[PlayerController::assignCountries] :p1->NU-Ellesmere_Island
+[Player::addCountryCaptured] :p2 --CAPTURED--> N&L-Labrador
+[PlayerController::assignCountries] :p2->N&L-Labrador
+[Player::addCountryCaptured] :p1 --CAPTURED--> Quebec-South
+[PlayerController::assignCountries] :p1->Quebec-South
+[Player::addCountryCaptured] :p2 --CAPTURED--> Ontario-North
+[PlayerController::assignCountries] :p2->Ontario-North
+[Player::addCountryCaptured] :p1 --CAPTURED--> Prince_Edward_Island
+[PlayerController::assignCountries] :p1->Prince_Edward_Island
+[Player::addCountryCaptured] :p2 --CAPTURED--> British_Columbia-South
+[PlayerController::assignCountries] :p2->British_Columbia-South
+[Player::addCountryCaptured] :p1 --CAPTURED--> Manitoba-South
+[PlayerController::assignCountries] :p1->Manitoba-South
+[PlayerController::updateContinents] :p1->Western_Provinces-North
 [PlayerController::assignColors] :p1 is assigned color : [0;31m
 [PlayerController::assignColors] :p2 is assigned color : [0;32m
-[PlayerController::calculateArmiesForPlayer] :p1 has been assigned 4
-[PlayerController::calculateArmiesForPlayer] :p2 has been assigned 4
+[PlayerController::calculateArmiesForPlayer] :p1 has been assigned 7
+[PlayerController::calculateArmiesForPlayer] :p2 has been assigned 5
 [StartUpPhase::performAssignCountries] : changing the phase to Issue Orde Phase
 
 ******************************************************************************************

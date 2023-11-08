@@ -1,17 +1,34 @@
 package org.Model.Orders;
 
-import org.Controller.GameController;
+import org.Controller.GameEngine;
 import org.Model.Country;
 import org.Model.GameState;
 import org.Model.Player;
 import org.Utils.LogLevel;
-import java.util.Objects;
 
-
+/**
+ * Class to handle the commands based on airlift order
+ */
 public class Advance implements Order {
+
+    /**
+     * Player who want to advance his army
+     */
     private Player d_player;
+
+    /**
+     * Attacking country
+     */
     private Country d_attackingCountry;
+
+    /**
+     * Defending country
+     */
     private Country d_defendingCountry;
+
+    /**
+     * Num of armies attacking
+     */
     private Integer d_advancingArmies;
 
     public Advance(Player p_player, Country p_attackingCountry , Country  p_defendingCountry, Integer p_attackingArmies){
@@ -20,6 +37,13 @@ public class Advance implements Order {
         this.d_attackingCountry = p_attackingCountry;
         this.d_advancingArmies = p_attackingArmies;
     }
+
+    /**
+     * Helper function to get the owner of the country
+     * @param p_countryName : Country whose owner has to be decided
+     * @param p_gameState : Gamestate of the country
+     * @return Player : The owner player
+     */
     private Player getCountryOwner(String p_countryName, GameState p_gameState){
         for (Player p: p_gameState.getPlayerController().getAllPlayers()){
                 if(p.getCountryCaptured().contains(p_gameState.getCurrentMap().getCountryByName(p_countryName))){
@@ -29,6 +53,9 @@ public class Advance implements Order {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(GameState p_gameState) {
         Player l_ownerOfDefendingCountry = getCountryOwner(d_defendingCountry.getCountryName(),p_gameState);
@@ -41,21 +68,29 @@ public class Advance implements Order {
                  simulateAttack(l_ownerOfDefendingCountry, p_gameState);
             }
         } else {
-            GameController.log("Advance::execute",LogLevel.BASICLOG,"error in the execution of Advance Command.");
+            GameEngine.log("Advance::execute",LogLevel.BASICLOG,"error in the execution of Advance Command.");
             System.out.println("Error in execution of Advance command.");
         }
 
     }
 
+    /**
+     * Helper function which deploys army in case the defending country belongs to current player
+     */
     private void deployArmies(){
         int l_newArmyCount = d_defendingCountry.getArmies() + d_advancingArmies;
         d_defendingCountry.setArmies(l_newArmyCount);
         d_attackingCountry.setArmies(d_attackingCountry.getArmies() - d_advancingArmies);
-        GameController.log("Advance::deployArmies",LogLevel.BASICLOG,d_player.getPlayerName() +
+        GameEngine.log("Advance::deployArmies",LogLevel.BASICLOG,d_player.getPlayerName() +
                 " deployed " + d_advancingArmies + " to " + d_defendingCountry.getCountryName() + " as the " +
                 d_attackingCountry.getCountryName() + " is neighbour");
     }
 
+    /**
+     * Helper function which is used when the defending country has 0 army
+     * @param p_defender : Defending player
+     * @param p_gameState : Current game state
+     */
     private void conquerDefendingCountry(Player p_defender, GameState p_gameState){
         d_defendingCountry.setArmies(d_advancingArmies);
         d_attackingCountry.setArmies(d_attackingCountry.getArmies() - d_advancingArmies);
@@ -63,12 +98,17 @@ public class Advance implements Order {
         d_player.getCountryCaptured().add(d_defendingCountry);
         p_gameState.getPlayerController().updateContinents(d_player,p_gameState);
         d_player.assignCard(p_gameState);
-        GameController.log("Advance::conquerDefendingCountry",LogLevel.BASICLOG,d_player.getPlayerName() +
+        GameEngine.log("Advance::conquerDefendingCountry",LogLevel.BASICLOG,d_player.getPlayerName() +
                 " captured " + d_defendingCountry.getCountryName());
 
 
     }
 
+    /**
+     * Helper function contains the logic of the main attack
+     * @param p_defender : Defender player
+     * @param p_gameState : Current gamestate
+     */
     public void simulateAttack(Player p_defender, GameState p_gameState){
         int l_numOfAttackerArmies = d_advancingArmies; // 10
         int l_numOfDefendingArmies = d_defendingCountry.getArmies(); //3
@@ -94,21 +134,21 @@ public class Advance implements Order {
             d_attackingCountry.setArmies(d_attackingCountry.getArmies() - d_advancingArmies);
             d_player.getCountryCaptured().add(d_defendingCountry);
             d_player.assignCard(p_gameState);
-            GameController.log("Advance::simulateAttack",LogLevel.BASICLOG,d_player.getPlayerName() +
+            GameEngine.log("Advance::simulateAttack",LogLevel.BASICLOG,d_player.getPlayerName() +
                     " captured " + d_defendingCountry.getCountryName());
-            GameController.log("Advance::simulateAttack",LogLevel.BASICLOG,"Defending Country Army : " +
+            GameEngine.log("Advance::simulateAttack",LogLevel.BASICLOG,"Defending Country Army : " +
                     d_defendingCountry.getArmies());
 
         } else {
 
             d_defendingCountry.setArmies(l_updatedDefenderArmy);
             d_attackingCountry.setArmies(d_attackingCountry.getArmies() - d_advancingArmies + l_updatedAttackerArmy);
-            GameController.log("Advance::simulateAttack",LogLevel.BASICLOG,"Attack Unsuccessful");
-            GameController.log("Advance::simulateAttack", LogLevel.BASICLOG,d_attackingCountry.getCountryName()
+            GameEngine.log("Advance::simulateAttack",LogLevel.BASICLOG,"Attack Unsuccessful");
+            GameEngine.log("Advance::simulateAttack", LogLevel.BASICLOG,d_attackingCountry.getCountryName()
                     + " --ADV--> " + d_defendingCountry.getCountryName());
-            GameController.log("Advance::simulateAttack", LogLevel.BASICLOG,"Updated Defender Army : "
+            GameEngine.log("Advance::simulateAttack", LogLevel.BASICLOG,"Updated Defender Army : "
                     + l_updatedDefenderArmy);
-            GameController.log("Advance::simulateAttack", LogLevel.BASICLOG,"Updated Attacker Army : "
+            GameEngine.log("Advance::simulateAttack", LogLevel.BASICLOG,"Updated Attacker Army : "
                     + l_numOfAttackerArmies);
         }
         p_gameState.getPlayerController().updateContinents(d_player,p_gameState);
@@ -116,7 +156,9 @@ public class Advance implements Order {
     }
 
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean valid(GameState p_gameState) {
         Country l_firstCheck = d_player.getCapturedCountryByName(d_attackingCountry.getCountryName());
@@ -139,7 +181,9 @@ public class Advance implements Order {
         }
         return true;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getOrder() {
         return "advance " + d_attackingCountry.getCountryName() + " " + d_defendingCountry.getCountryName() + " " +

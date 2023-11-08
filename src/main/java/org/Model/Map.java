@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.io.File;
 import java.util.*;
 
-import org.Controller.GameController;
+import org.Controller.GameEngine;
 import org.Exceptions.MapInvalidException;
 import org.Constants.AllTheConstants;
 import org.Utils.LogLevel;
@@ -23,11 +23,32 @@ import org.davidmoten.text.utils.WordWrap;
  */
 public class Map {
 
-
+    /**
+     * Static flag to show if any of the map is loaded or not
+     */
     public static Boolean d_isMapLoaded = false;
+
+    /**
+     * List keeping all the countries read from the map
+     */
     private List<Country> d_allCountriesAsList;
+
+    /**
+     * List keeping all the continents read from the map
+     */
     private List<Continent> d_allContinentsAsList;
+
+    /**
+     * List keeping the map file from which map is loaded.
+     */
     private String d_mapFile;
+
+    /**
+     * String for keeping the track of map editing file
+     */
+    private String d_mapEditFile = null;
+
+
 
     public String getMapFile(){ return this.d_mapFile; }
     public void setMapFile(String l_mapFile){this.d_mapFile = l_mapFile;}
@@ -68,9 +89,9 @@ public class Map {
             int l_continentId = Math.max(1,d_allContinentsAsList.size() + 1);
             if(getContinentByName(p_continentName) ==  null){
                 addContinent(new Continent(l_continentId, p_continentName, p_bonusValue));
-                GameController.log("Map::addContinent", LogLevel.BASICLOG,p_continentName + " added to the GameState.");
+                GameEngine.log("Map::addContinent", LogLevel.BASICLOG,p_continentName + " added to the GameState.");
             } else {
-                GameController.log("Map::addContinent", LogLevel.BASICLOG, p_continentName + " already exists in the map.");
+                GameEngine.log("Map::addContinent", LogLevel.BASICLOG, p_continentName + " already exists in the map.");
                 throw new MapInvalidException(p_continentName + " already exists in the map");
             }
         } else {
@@ -90,9 +111,9 @@ public class Map {
                 Country l_newCountry = new Country(l_countryId,p_countryName,l_continent.getContinentId());
                 d_allCountriesAsList.add(l_newCountry);
                 l_continent.addCountry(l_newCountry);
-                GameController.log("Map::addCountry",LogLevel.BASICLOG, p_countryName + " added to the GameState");
+                GameEngine.log("Map::addCountry",LogLevel.BASICLOG, p_countryName + " added to the GameState");
             } else {
-                GameController.log("Map::addCountry",LogLevel.BASICLOG,p_countryName + " already exist in the map");
+                GameEngine.log("Map::addCountry",LogLevel.BASICLOG,p_countryName + " already exist in the map");
                 throw new MapInvalidException("Country already exists in the map. ");
             }
         } else {
@@ -100,7 +121,7 @@ public class Map {
             Country l_newCountry = new Country(1,p_countryName,l_continent.getContinentId());
             d_allCountriesAsList.add(l_newCountry);
             l_continent.addCountry(l_newCountry);
-            GameController.log("Map::addCountry",LogLevel.BASICLOG,p_countryName + " added to the GameState");
+            GameEngine.log("Map::addCountry",LogLevel.BASICLOG,p_countryName + " added to the GameState");
         }
     }
     public void addNeighbour(String p_mainCountry , String p_neighbourCountry) throws MapInvalidException{
@@ -109,9 +130,9 @@ public class Map {
             if(l_ifBothCountryExist){
                 getCountryByName(p_mainCountry).addNeighbour(getCountryByName(p_neighbourCountry).getCountryId());
                 getCountryByName(p_neighbourCountry).addNeighbour(getCountryByName(p_mainCountry).getCountryId());
-                GameController.log("Map::addNeighbour",LogLevel.BASICLOG,p_neighbourCountry + " is added as neighbour of " + p_mainCountry);
+                GameEngine.log("Map::addNeighbour",LogLevel.BASICLOG,p_neighbourCountry + " is added as neighbour of " + p_mainCountry);
             } else {
-                GameController.log("Map::addNeighbour",LogLevel.BASICLOG,"Adding neighbour failed for (" + p_mainCountry + "," +
+                GameEngine.log("Map::addNeighbour",LogLevel.BASICLOG,"Adding neighbour failed for (" + p_mainCountry + "," +
                         p_neighbourCountry + ").");
                 throw new MapInvalidException("Countries provided doesn't not exist");
             }
@@ -121,7 +142,7 @@ public class Map {
         for(Country l_country : d_allCountriesAsList){
             if(l_country.hasNeighbour(p_countryToBeRemoved)){
                 l_country.removeNeighbour(p_countryToBeRemoved.getCountryId());
-                GameController.log("Map::removeCountryFromNeighbourOfAllCountry",LogLevel.BASICLOG,p_countryToBeRemoved.getCountryName()
+                GameEngine.log("Map::removeCountryFromNeighbourOfAllCountry",LogLevel.BASICLOG,p_countryToBeRemoved.getCountryName()
                         + " removed from neighbour of " + l_country.getCountryName());
             }
         }
@@ -138,9 +159,9 @@ public class Map {
 
             //Remove the country from teh neighbourList of all the countries
             removeCountryFromNeighbourOfAllCountry(l_countryToBeRemoved);
-            GameController.log("Map::removeCountry",LogLevel.BASICLOG,p_countryName + " has been removed. " );
+            GameEngine.log("Map::removeCountry",LogLevel.BASICLOG,p_countryName + " has been removed. " );
         } else {
-            GameController.log("Map::removeCountry",LogLevel.BASICLOG,"Country " + p_countryName + "doesn't exist, for removal.");
+            GameEngine.log("Map::removeCountry",LogLevel.BASICLOG,"Country " + p_countryName + "doesn't exist, for removal.");
             throw new MapInvalidException("Country " + p_countryName + "doesn't exist, for removal.");
         }
     }
@@ -151,9 +172,9 @@ public class Map {
                 removeCountry(l_country.getCountryName());
             }
             d_allContinentsAsList.remove(l_continentToBeRemoved);
-            GameController.log("Map::removeContinent",LogLevel.BASICLOG,"Continent " + p_continentName + " removed successfully.");
+            GameEngine.log("Map::removeContinent",LogLevel.BASICLOG,"Continent " + p_continentName + " removed successfully.");
         } else {
-            GameController.log("Map::removeContinent",LogLevel.BASICLOG,"Continent " + p_continentName + " doesn't exist.");
+            GameEngine.log("Map::removeContinent",LogLevel.BASICLOG,"Continent " + p_continentName + " doesn't exist.");
             throw new MapInvalidException(p_continentName + " doesn't exist.");
         }
     }
@@ -163,10 +184,10 @@ public class Map {
             if(l_ifBothCountryExist){
                 getCountryByName(p_mainCountry).removeNeighbour(getCountryByName(p_neighbourCountry).getCountryId());
                 getCountryByName(p_neighbourCountry).removeNeighbour(getCountryByName(p_mainCountry).getCountryId());
-                GameController.log("Map::removeNeighbour",LogLevel.BASICLOG,"Neighbour pairs (" + p_mainCountry + "," + p_neighbourCountry + "). removed");
+                GameEngine.log("Map::removeNeighbour",LogLevel.BASICLOG,"Neighbour pairs (" + p_mainCountry + "," + p_neighbourCountry + "). removed");
             }
             else {
-                GameController.log("Map::removeNeighbour",LogLevel.BASICLOG,"Neighbour pairs (" + p_mainCountry + "," + p_neighbourCountry + "). removal " +
+                GameEngine.log("Map::removeNeighbour",LogLevel.BASICLOG,"Neighbour pairs (" + p_mainCountry + "," + p_neighbourCountry + "). removal " +
                         "unsuccessful");
                 throw new MapInvalidException("Neighbour doesn't exist.");
             }
@@ -176,16 +197,16 @@ public class Map {
 
         try {
             if (d_allContinentsAsList == null || d_allContinentsAsList.isEmpty()) {
-                GameController.log("Map::mapSanityCheck", LogLevel.BASICLOG, " Continents Lists are Empty.");
+                GameEngine.log("Map::mapSanityCheck", LogLevel.BASICLOG, " Continents Lists are Empty.");
                 throw new MapInvalidException("Continents lists are empty.");
             }
             if (d_allCountriesAsList == null || d_allCountriesAsList.isEmpty()) {
-                GameController.log("Map::mapSanityCheck", LogLevel.BASICLOG, " Countries Lists are Empty.");
+                GameEngine.log("Map::mapSanityCheck", LogLevel.BASICLOG, " Countries Lists are Empty.");
                 throw new MapInvalidException("Countries list is empty.");
             }
             for (Country l_country : d_allCountriesAsList) {
                 if (l_country.getNeighbourCountries().isEmpty()) {
-                    GameController.log("Map::mapSanityCheck", LogLevel.BASICLOG, l_country.getCountryName() + " has no neighbours.");
+                    GameEngine.log("Map::mapSanityCheck", LogLevel.BASICLOG, l_country.getCountryName() + " has no neighbours.");
                     throw new MapInvalidException(l_country.getCountryName() + " doesn't have any neighbours.");
                 }
             }
@@ -221,7 +242,7 @@ public class Map {
                 throw new MapInvalidException(l_continent.getContinentName() + " doesn't have any countries.");
             }
             if(!countriesInContinentConnectivity(l_continent)) {
-                GameController.log("Map::countriesInContinentConnectivity",LogLevel.BASICLOG,"Continent Based Connectivity : " + l_continent.getContinentName() + " failed connectivity test.");
+                GameEngine.log("Map::countriesInContinentConnectivity",LogLevel.BASICLOG,"Continent Based Connectivity : " + l_continent.getContinentName() + " failed connectivity test.");
                 return false;
             }
         }
@@ -246,7 +267,7 @@ public class Map {
             if(!l_entry.getValue()){
                 String l_logString = getCountryById(l_entry.getKey()).getCountryName()
                         + "is not reachable.";
-                GameController.log("Map::checkCountryBasedConnectivity",LogLevel.BASICLOG,l_logString);
+                GameEngine.log("Map::checkCountryBasedConnectivity",LogLevel.BASICLOG,l_logString);
                 throw new MapInvalidException(l_logString);
             }
         }
@@ -261,7 +282,7 @@ public class Map {
                 l_adjCountries.add(getCountryById(i));
             }
         } else {
-            GameController.log("Map::getNeighbourCountries",LogLevel.BASICLOG,p_country.getCountryName() + " doesn't have any adjacent countries");
+            GameEngine.log("Map::getNeighbourCountries",LogLevel.BASICLOG,p_country.getCountryName() + " doesn't have any adjacent countries");
             throw new MapInvalidException(p_country.getCountryName() + " doesn't have any adjacent countries");
         }
         return l_adjCountries;
@@ -344,6 +365,9 @@ public class Map {
                 File myObj = new File(AllTheConstants.defaultMapLocationAppendString + p_fileName);
                 Scanner l_scanner = new Scanner(myObj);
 
+
+                this.setMapFile(p_fileName);
+
                 while (l_scanner.hasNextLine()) {
                     String l_readData = l_scanner.nextLine();
                     l_fileLineByLine.add(l_readData);
@@ -393,10 +417,10 @@ public class Map {
                 } else {
                     d_isMapLoaded = false;
                 }
-                GameController.log("Map::loadmap", LogLevel.BASICLOG,"Map is loaded successfully.");
+                GameEngine.log("Map::loadmap", LogLevel.BASICLOG,"Map is loaded successfully.");
             } catch(Exception ex){
                 d_isMapLoaded = false;
-                GameController.log("Map::loadmap", LogLevel.BASICLOG,"Map is not loaded successfully.");
+                GameEngine.log("Map::loadmap", LogLevel.BASICLOG,"Map is not loaded successfully.");
                 throw new MapInvalidException("Invalid Map Provided.");
             }
 
@@ -406,25 +430,26 @@ public class Map {
         File l_newFile = new File(AllTheConstants.defaultMapLocationAppendString + p_fileName);
 
         if (l_newFile.createNewFile()) {
-            GameController.log("Map::editMap",LogLevel.BASICLOG,p_fileName + " has been created.");
+            GameEngine.log("Map::editMap",LogLevel.BASICLOG,p_fileName + " has been created.");
             System.out.println("File has been created.");
-            this.setMapFile(p_fileName);
+            this.d_mapEditFile = p_fileName;
+
         } else {
             System.out.println("File already exists.");
             if(!d_isMapLoaded)
                 this.loadMap(p_fileName);
-            else
-                System.out.println("Map is already loaded...");
+            else {
+                System.out.println(this.d_mapFile + " is already loaded.");
+            }
         }
     }
     public void saveMap(String p_fileName) throws MapInvalidException, IOException{
         boolean l_flagValidate = false;
-        if(getMapFile() == null || p_fileName == null) {
+        if(p_fileName == null) {
             throw new MapInvalidException("File doesn't exist.");
         }
-
-        if (!getMapFile().equalsIgnoreCase(p_fileName)) {
-            GameController.log("Map::saveMap",LogLevel.BASICLOG,"Kindly provide same file name to save which you have given for edit");
+        if (!d_isMapLoaded && !d_mapEditFile.equalsIgnoreCase(p_fileName)) {
+            GameEngine.log("Map::saveMap",LogLevel.BASICLOG,"Kindly provide same file name to save which you have given for edit");
             throw new MapInvalidException("Kindly provide same file name to save which you have given for edit");
         } else {
             if (this.validateMap()) {
@@ -466,7 +491,7 @@ public class Map {
                             l_writer.write(l_borderStr + System.lineSeparator());
                         }
                     }
-                    GameController.log("Map::saveMap",LogLevel.BASICLOG,"Map Saved Successfully");
+                    GameEngine.log("Map::saveMap",LogLevel.BASICLOG,"Map Saved Successfully");
                     l_writer.close();
             }
 

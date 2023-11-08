@@ -1,32 +1,49 @@
 package org.Model.Phases;
 
-import org.Controller.GameController;
+import org.Controller.GameEngine;
 import org.Model.Country;
 import org.Model.GameState;
 import org.Model.Player;
 import org.Utils.Command;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.matchers.Or;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 
 public class OrderExecutionPhaseTest {
-    GameController d_gameController;
+    GameEngine d_gameEngine;
     GameState d_gameState;
     Phase d_startUpPhase, d_issueOrderPhase;
     OrderExecutionPhase d_orderExecutionPhase;
 
+    public List<Country> getTwoNeighbourCountryOfDiffPlayer(Player l_playerOne , Player l_playerTwo){
+
+        List<Country> l_country = new ArrayList<>();
+        for(Country l_playerOneCountry : l_playerOne.getCountryCaptured()) {
+            for (Integer l_countryId : l_playerOneCountry.getNeighbourCountries()) {
+                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
+                if (l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)) {
+                    l_country.add(l_playerOneCountry);
+                    l_country.add(l_neighbourCountry);
+                    break;
+                }
+            }
+        }
+        return l_country;
+    }
     @Before
     public void setup(){
-        d_gameController = new GameController();
+        d_gameEngine = new GameEngine();
         d_gameState = new GameState();
-        d_startUpPhase = new StartUpPhase(d_gameController,d_gameState);
-        d_issueOrderPhase = new IssueOrderPhase(d_gameController,d_gameState);
-        d_orderExecutionPhase = new OrderExecutionPhase(d_gameController,d_gameState);
-        GameController.setLoggerContext("testLog.txt");
+        d_startUpPhase = new StartUpPhase(d_gameEngine,d_gameState);
+        d_issueOrderPhase = new IssueOrderPhase(d_gameEngine,d_gameState);
+        d_orderExecutionPhase = new OrderExecutionPhase(d_gameEngine,d_gameState);
+        GameEngine.setLoggerContext("testLog.txt");
     }
 
     @Test
@@ -34,11 +51,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -76,11 +93,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -114,11 +131,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -128,15 +145,9 @@ public class OrderExecutionPhaseTest {
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
 
-            Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_otherCountry   = null;
 
-            for(Integer l_countryId : l_randomCountry.getNeighbourCountries()){
-                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)){
-                    l_otherCountry = l_neighbourCountry;
-                }
-            }
+            Country l_randomCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
 //            String cmdTwo = "deploy " + l_otherCountry.getCountryName() + " " + (l_playerTwoArmies - 2);
@@ -161,11 +172,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -175,15 +186,8 @@ public class OrderExecutionPhaseTest {
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
 
-            Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_otherCountry   = null;
-
-            for(Integer l_countryId : l_randomCountry.getNeighbourCountries()){
-                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)){
-                    l_otherCountry = l_neighbourCountry;
-                }
-            }
+            Country l_randomCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
 //            String cmdTwo = "deploy " + l_otherCountry.getCountryName() + " " + (l_playerTwoArmies - 2);
@@ -207,11 +211,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -242,11 +246,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -277,11 +281,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -291,15 +295,10 @@ public class OrderExecutionPhaseTest {
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
 
-            Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_otherCountry   = null;
+            Country l_randomCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
-            for(Integer l_countryId : l_randomCountry.getNeighbourCountries()){
-                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)){
-                    l_otherCountry = l_neighbourCountry;
-                }
-            }
+
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + 10;
             l_playerOne.setNumOfArmiesRemaining(10);
@@ -330,11 +329,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -344,15 +343,8 @@ public class OrderExecutionPhaseTest {
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
 
-            Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_otherCountry   = null;
-
-            for(Integer l_countryId : l_randomCountry.getNeighbourCountries()){
-                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)){
-                    l_otherCountry = l_neighbourCountry;
-                }
-            }
+            Country l_randomCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
             l_playerTwo.setNumOfArmiesRemaining(10);
@@ -382,11 +374,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -402,6 +394,7 @@ public class OrderExecutionPhaseTest {
             for(Country l_country : l_playerOne.getCountryCaptured()){
                 if(!l_country.equals(l_randomCountry) && !l_randomCountry.getNeighbourCountries().contains(l_country.getCountryId())){
                     l_otherCountry = l_country;
+                    break;
                 }
             }
 
@@ -433,11 +426,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -473,11 +466,11 @@ public class OrderExecutionPhaseTest {
         Command l_loadMap = new Command("loadmap europe.map");
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -487,15 +480,10 @@ public class OrderExecutionPhaseTest {
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
 
-            Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_otherCountry   = null;
+            Country l_randomCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
-            for(Integer l_countryId : l_randomCountry.getNeighbourCountries()){
-                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)){
-                    l_otherCountry = l_neighbourCountry;
-                }
-            }
+
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
             l_playerTwo.setNumOfArmiesRemaining(10);
@@ -525,11 +513,11 @@ public class OrderExecutionPhaseTest {
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
 
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -540,15 +528,10 @@ public class OrderExecutionPhaseTest {
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
 
-            Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_otherCountry   = null;
+            Country l_randomCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
-            for(Integer l_countryId : l_randomCountry.getNeighbourCountries()){
-                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)){
-                    l_otherCountry = l_neighbourCountry;
-                }
-            }
+
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
             String cmdTwo = "deploy " + l_otherCountry.getCountryName() + " " + l_playerTwoArmies;
@@ -580,11 +563,11 @@ public class OrderExecutionPhaseTest {
         Command l_gamePlayer = new Command("gameplayer -add p1 -add p2");
 
         try{
-            GameController d_gameControllerMock = mock(GameController.class);
-            Phase d_newPhase = new StartUpPhase(d_gameControllerMock,d_gameState);
+            GameEngine d_gameEngineMock = mock(GameEngine.class);
+            Phase d_newPhase = new StartUpPhase(d_gameEngineMock,d_gameState);
             d_newPhase.performLoadMap(l_loadMap,null);
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
-            doNothing().when(d_gameControllerMock).setIssueOrderPhase();
+            doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
 
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
@@ -595,15 +578,8 @@ public class OrderExecutionPhaseTest {
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
 
-            Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_otherCountry   = null;
-
-            for(Integer l_countryId : l_randomCountry.getNeighbourCountries()){
-                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)){
-                    l_otherCountry = l_neighbourCountry;
-                }
-            }
+            Country l_randomCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
             String cmdTwo = "deploy " + l_otherCountry.getCountryName() + " " + l_playerTwoArmies;

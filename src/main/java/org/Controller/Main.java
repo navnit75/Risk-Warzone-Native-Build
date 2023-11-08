@@ -9,8 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        GameController l_game  = new GameController();
-        GameController.setLoggerContext("logFile.txt");
+        GameEngine l_game  = new GameEngine();
+        GameEngine.setLoggerContext("logFile.txt");
         try {
             l_game.getCurrentPhase().initPhase();
         } catch (Exception ex){

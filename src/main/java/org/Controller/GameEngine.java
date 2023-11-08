@@ -15,7 +15,7 @@ import org.Utils.LogWriter;
  * Keep track of the state game is in.
  * Allows for defining Logging Context, as the file where the log of the game should be saved.
  */
-public class GameController {
+public class GameEngine {
     /**
      * Data structure to keep the current gameplay details.
      */
