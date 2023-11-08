@@ -7,6 +7,10 @@ import org.Model.Player;
 import org.Utils.Command;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -25,6 +29,21 @@ public class IssueOrderPhaseTest {
         GameEngine.setLoggerContext("testLog.txt");
     }
 
+    public List<Country> getTwoNeighbourCountryOfDiffPlayer(Player l_playerOne , Player l_playerTwo){
+        List<Country> l_country = new ArrayList<>();
+        for(Country l_playerOneCountry : l_playerOne.getCountryCaptured()) {
+            for (Integer l_countryId : l_playerOneCountry.getNeighbourCountries()) {
+                Country l_neighbourCountry = d_gameState.getCurrentMap().getCountryById(l_countryId);
+                if (l_playerTwo.getCountryCaptured().contains(l_neighbourCountry)) {
+                    l_country.add(l_playerOneCountry);
+                    l_country.add(l_neighbourCountry);
+                    break;
+                }
+            }
+        }
+        return l_country;
+    }
+
     @Test
     public void testPerformDeploy(){
         Command l_loadMap = new Command("loadmap europe.map");
@@ -36,14 +55,12 @@ public class IssueOrderPhaseTest {
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
             doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
-
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
             Country l_randomCountry  = l_playerOne.getCountryCaptured().get(0);
             String cmd = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
             Command l_deployCmd = new Command(cmd);
             d_issueOrderPhase.performDeployArmies(l_deployCmd,d_gameState.getPlayerController().getPlayerByName("p1"));
-
             assertEquals(l_playerOne.getOrderList().get(0).getOrder(), cmd);
         } catch(Exception ex){
             assertNull(ex);
@@ -61,31 +78,14 @@ public class IssueOrderPhaseTest {
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
             doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
-
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
             Player l_playerTwo = d_gameState.getPlayerController().getPlayerByName("p2");
-
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
-//            Integer l_playerTwoArmies = l_playerTwo.getNumOfArmiesRemaining();
-
-            Country l_attackingCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_defendingCountry = null;
-
-            // find the neighbour country of attacking country which belongs to player 2
-            for(Integer l_countryId : l_attackingCountry.getNeighbourCountries()){
-                Country temp_Storage = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(temp_Storage)){
-                    l_defendingCountry = temp_Storage;
-                    break;
-                }
-            }
-
-
-
+            Country l_attackingCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_defendingCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
             String cmd = "advance " + l_attackingCountry.getCountryName() + " " + l_defendingCountry.getCountryName() + " " + l_playerOneArmies;
             Command l_advCommand = new Command(cmd);
             d_issueOrderPhase.performAdvanceArmies(l_advCommand,l_playerOne);
-
             assertEquals(l_playerOne.getOrderList().get(0).getOrder(), cmd);
         } catch(Exception ex){
             assertNull(ex);
@@ -103,7 +103,6 @@ public class IssueOrderPhaseTest {
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
             doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
-
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
             l_playerOne.getAllCards().add("airlift");
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
@@ -129,22 +128,12 @@ public class IssueOrderPhaseTest {
             d_newPhase.performCreatePlayers(l_gamePlayer, null);
             doNothing().when(d_gameEngineMock).setIssueOrderPhase();
             d_newPhase.performAssignCountries(null);
-
             Player l_playerOne = d_gameState.getPlayerController().getPlayerByName("p1");
             l_playerOne.getAllCards().add("bomb");
             Player l_playerTwo = d_gameState.getPlayerController().getPlayerByName("p2");
-
             Integer l_playerOneArmies = l_playerOne.getNumOfArmiesRemaining();
-            Country l_sourceCountry  = l_playerOne.getCountryCaptured().get(0);
-            Country l_targetCountry  = null;
-
-            for(Integer l_countryId : l_sourceCountry.getNeighbourCountries()){
-                Country temp_Storage = d_gameState.getCurrentMap().getCountryById(l_countryId);
-                if(l_playerTwo.getCountryCaptured().contains(temp_Storage)){
-                    l_targetCountry = temp_Storage;
-                    break;
-                }
-            }
+            Country l_sourceCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(0);
+            Country l_targetCountry  = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
             String cmd = "bomb " + l_targetCountry.getCountryName();
             Command l_airliftCommand = new Command(cmd);
             d_issueOrderPhase.performCardHandle(l_airliftCommand,l_playerOne);
