@@ -150,13 +150,10 @@ public class OrderExecutionPhaseTest {
             Country l_otherCountry   = this.getTwoNeighbourCountryOfDiffPlayer(l_playerOne,l_playerTwo).get(1);
 
             String cmdOne = "deploy " + l_randomCountry.getCountryName() + " " + l_playerOneArmies;
-//            String cmdTwo = "deploy " + l_otherCountry.getCountryName() + " " + (l_playerTwoArmies - 2);
             String cmdTwo = "advance " + l_randomCountry.getCountryName() + " " + l_otherCountry.getCountryName() + " " + (l_playerOneArmies - 1);
 
             Command l_deployCmd = new Command(cmdOne);
             Command l_advanceCmd = new Command(cmdTwo);
-//            Command l_deployCmdTwo = new Command(cmdTwo);
-
             d_issueOrderPhase.performDeployArmies(l_deployCmd,l_playerOne);
             d_issueOrderPhase.performAdvanceArmies(l_advanceCmd,l_playerOne);
 
