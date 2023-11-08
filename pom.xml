@@ -57,6 +57,16 @@
                 <version>3.2.1</version>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.0</version> <!-- Adjust version as needed -->
+
+                <configuration>
+                    <additionalparam>-Xdoclint:check</additionalparam>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
