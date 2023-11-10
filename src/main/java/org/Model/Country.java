@@ -1,9 +1,11 @@
 package org.Model;
+
 import org.Controller.GameEngine;
 import org.Exceptions.MapInvalidException;
 import org.Utils.LogLevel;
-import java.util.List;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Country model class, which contains features and data members related to a country.
@@ -119,15 +121,9 @@ public class Country {
     /**
      * Method to remove country as neighbour of the current country by providing the id of the country to be removed.
      * @param p_countryId : Country id to be removed
-     * @throws MapInvalidException : In case the country doesn't exist
      */
-    public void removeNeighbour(Integer p_countryId) throws MapInvalidException{
-        if(d_neighbourCountries.contains(p_countryId)){
-            d_neighbourCountries.remove(p_countryId);
-        } else {
-            GameEngine.log("Country::removeNeighbour",LogLevel.BASICLOG,p_countryId + "  is not a neighbour of " + this.getCountryName());
-            throw new MapInvalidException("Neighbour doesn't exist");
-        }
+    public void removeNeighbour(Integer p_countryId){
+        d_neighbourCountries.remove(p_countryId);
     }
 
     /**
@@ -138,4 +134,5 @@ public class Country {
     public boolean hasNeighbour(Country p_country){
         return !d_neighbourCountries.isEmpty() && d_neighbourCountries.contains(p_country.getCountryId());
     }
+
 }

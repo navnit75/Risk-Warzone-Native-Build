@@ -1,9 +1,11 @@
 package org.Utils;
 
-import org.Constants.*;
+import org.Constants.AllTheConstants;
 import org.Controller.GameEngine;
 import org.Exceptions.InvalidCommand;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Utility class to handle the Command received from players.
@@ -52,19 +54,34 @@ public class Command {
         String[] l_commandSplit = d_receivedCommand.split(" ");
 
         if(l_commandSplit.length < 3){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for editcontinent");
+            GameEngine.log("Command::handleEditContinent",LogLevel.BASICLOG,"Invalid number of " +
+                    "arguments provided for editcontinent");
             throw new InvalidCommand("Invalid command for editcontinent.");
         }
         int i = 1 ;
-        while( i < l_commandSplit.length){
-            if(l_commandSplit[i].equalsIgnoreCase("add")){
-                l_allAddOperations.add(l_commandSplit[i+1]);
-                l_allAddOperations.add(l_commandSplit[i+2]);
-                i += 3;
-            } else if(l_commandSplit[i].equalsIgnoreCase(("remove"))){
-                l_allRemoveOperations.add(l_commandSplit[i+1]);
-                i += 2;
+        String l_firstArgument = "" , l_secondArgument = "";
+        try {
+            while (i < l_commandSplit.length) {
+                if (l_commandSplit[i].equalsIgnoreCase("add")) {
+                    l_firstArgument = l_commandSplit[i + 1];
+                    l_secondArgument = l_commandSplit[i + 2];
+                    l_allAddOperations.add(l_firstArgument.trim());
+                    l_allAddOperations.add(l_secondArgument.trim());
+                    i += 3;
+                } else if (l_commandSplit[i].equalsIgnoreCase(("remove"))) {
+                    l_firstArgument = l_commandSplit[i+1];
+                    l_allRemoveOperations.add(l_firstArgument.trim());
+                    i += 2;
+                } else {
+                    GameEngine.log("Command::handleEditContinent",LogLevel.BASICLOG,"Invalid " +
+                            "operation provided.");
+                    throw new InvalidCommand("");
+                }
             }
+        } catch(Exception l_e){
+            GameEngine.log("Command::handleEditContinent",LogLevel.BASICLOG,"Invalid " +
+                    "commmand provided.");
+            throw new InvalidCommand("Invalid arguments provided for editcontinent operation !!!.");
         }
         l_returnType.put("add",l_allAddOperations);
         l_returnType.put("remove",l_allRemoveOperations);
@@ -83,20 +100,33 @@ public class Command {
         String[] l_commandSplit = d_receivedCommand.split(" ");
 
         if(l_commandSplit.length < 3){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for editcountry");
+            GameEngine.log("Command::handleEditCountry",LogLevel.BASICLOG,"Invalid number of arguments provided for editcountry");
             throw new InvalidCommand("Invalid command for editcountry.");
         }
-
-        int i = 1 ;
-        while( i < l_commandSplit.length){
-            if(l_commandSplit[i].equalsIgnoreCase("add")){
-                l_allAddOperations.add(l_commandSplit[i+1]);
-                l_allAddOperations.add(l_commandSplit[i+2]);
-                i += 3;
-            } else if(l_commandSplit[i].equalsIgnoreCase(("remove"))){
-                l_allRemoveOperations.add(l_commandSplit[i+1]);
-                i += 2;
+        String l_firstArgument = "" , l_secondArgument = "";
+        try {
+            int i = 1;
+            while (i < l_commandSplit.length) {
+                if (l_commandSplit[i].equalsIgnoreCase("add")) {
+                    l_firstArgument = l_commandSplit[i + 1];
+                    l_secondArgument = l_commandSplit[i + 2];
+                    l_allAddOperations.add(l_firstArgument.trim());
+                    l_allAddOperations.add(l_secondArgument.trim());
+                    i += 3;
+                } else if (l_commandSplit[i].equalsIgnoreCase(("remove"))) {
+                    l_firstArgument = l_commandSplit[i+1];
+                    l_allRemoveOperations.add(l_firstArgument.trim());
+                    i += 2;
+                } else{
+                    GameEngine.log("Command::handleEditCountry",LogLevel.BASICLOG,"Invalid " +
+                            "operation provided.");
+                    throw new InvalidCommand("");
+                }
             }
+        } catch(Exception l_e){
+            GameEngine.log("Command::handleEditCountry",LogLevel.BASICLOG,"Invalid " +
+                    "editcountry commmand provided.");
+            throw new InvalidCommand("Invalid arguments provided for editcountry operation !!!.");
         }
         l_returnType.put("add",l_allAddOperations);
         l_returnType.put("remove",l_allRemoveOperations);
@@ -113,21 +143,38 @@ public class Command {
         ArrayList<String> l_allAddOperations = new ArrayList<>();
         ArrayList<String> l_allRemoveOperations = new ArrayList<>();
         String[] l_commandSplit = d_receivedCommand.split(" ");
+        String l_firstArgument = "" , l_secondArgument = "";
 
         if(l_commandSplit.length < 4){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for editneighbour");
-            throw new InvalidCommand("Invalid command for editneighbour.");
+            GameEngine.log("Command::handleEditNeighbour",LogLevel.BASICLOG,"Invalid number of " +
+                    "arguments provided for editneighbour");
+            throw new InvalidCommand("Invalid command for editneighbour. !!!");
         }
-        int i = 1 ;
-        while( i < l_commandSplit.length){
-            if(l_commandSplit[i].equalsIgnoreCase("add")){
-                l_allAddOperations.add(l_commandSplit[i+1]);
-                l_allAddOperations.add(l_commandSplit[i+2]);
-            } else if(l_commandSplit[i].equalsIgnoreCase(("remove"))){
-                l_allRemoveOperations.add(l_commandSplit[i+1]);
-                l_allRemoveOperations.add(l_commandSplit[i+2]);
+        try {
+            int i = 1;
+            while (i < l_commandSplit.length) {
+                if (l_commandSplit[i].equalsIgnoreCase("add")) {
+                    l_firstArgument = l_commandSplit[i + 1];
+                    l_secondArgument = l_commandSplit[i + 2];
+                    l_allAddOperations.add(l_firstArgument.trim());
+                    l_allAddOperations.add(l_secondArgument.trim());
+                } else if (l_commandSplit[i].equalsIgnoreCase(("remove"))) {
+                    l_firstArgument = l_commandSplit[i + 1];
+                    l_secondArgument = l_commandSplit[i + 2];
+                    l_allRemoveOperations.add(l_firstArgument.trim());
+                    l_allRemoveOperations.add(l_secondArgument.trim());
+                } else {
+                    GameEngine.log("Command::handleEditNeighbour", LogLevel.BASICLOG, "Invalid " +
+                            "arguments provided for editneighbour");
+                    throw new InvalidCommand("Invalid arguments provided with editneighbour operation. !!!");
+                }
+                i += 3;
             }
-            i += 3;
+        }
+        catch(Exception l_e){
+            GameEngine.log("Command::handleEditNeighbour", LogLevel.BASICLOG, "Invalid arguments" +
+                    " provided for editneighbour");
+            throw new InvalidCommand("Invalid arguments provided with editneighbour operation. !!!");
         }
         l_returnType.put("add",l_allAddOperations);
         l_returnType.put("remove",l_allRemoveOperations);
@@ -142,10 +189,18 @@ public class Command {
     public String handleLoadMap() throws InvalidCommand{
         String[] l_commandSplit = d_receivedCommand.split(" ");
         if(l_commandSplit.length != 2){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for loadmap");
+            GameEngine.log("Command::handleLoadMap",LogLevel.BASICLOG,"Invalid number of " +
+                    "arguments provided for loadmap");
             throw new InvalidCommand("Invalid command for loadmap");
+        } else {
+            if(l_commandSplit[1] != null){
+                return l_commandSplit[1];
+            } else {
+                GameEngine.log("Command::handleLoadMap",LogLevel.BASICLOG,"Invalid " +
+                        "arguments provided for loadmap");
+                throw new InvalidCommand("Invalid arguments provided for loadmap operation.");
+            }
         }
-        return l_commandSplit[1].trim();
     }
 
     /**
@@ -156,10 +211,18 @@ public class Command {
     public String handleEditMap() throws InvalidCommand{
         String[] l_commandSplit = d_receivedCommand.split(" ");
         if(l_commandSplit.length != 2){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for editmap");
+            GameEngine.log("Command::handleEditMap",LogLevel.BASICLOG,"Invalid number of arguments provided for editmap");
             throw new InvalidCommand("Invalid command for editmap");
         }
-        return l_commandSplit[1].trim();
+        else {
+            if(l_commandSplit[1] != null){
+                return l_commandSplit[1];
+            } else {
+                GameEngine.log("Command::handleLoadMap",LogLevel.BASICLOG,"Invalid " +
+                        "arguments provided for editmap");
+                throw new InvalidCommand("Invalid arguments provided for editmap operation.");
+            }
+        }
     }
 
     /**
@@ -170,10 +233,18 @@ public class Command {
     public String handleSaveMap() throws InvalidCommand{
         String[] l_commandSplit = d_receivedCommand.split(" ");
         if(l_commandSplit.length != 2){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for savemap");
+            GameEngine.log("Command::handleSaveMap",LogLevel.BASICLOG,"Invalid number of arguments provided for savemap");
             throw new InvalidCommand("Invalid command for savemap");
+        }else {
+            if(l_commandSplit[1] != null){
+                return l_commandSplit[1];
+            } else {
+                GameEngine.log("Command::handleLoadMap",LogLevel.BASICLOG,"Invalid " +
+                        "arguments provided for editmap");
+                throw new InvalidCommand("Invalid arguments provided for savemap operation.");
+            }
         }
-        return l_commandSplit[1].trim();
+
     }
 
     /**
@@ -187,19 +258,26 @@ public class Command {
         ArrayList<String> l_allRemoveOperations = new ArrayList<>();
         String[] l_commandSplit = d_receivedCommand.split(" ");
         if(l_commandSplit.length < 3){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for gameplayer");
+            GameEngine.log("Command::handleAddAndRemovePlayer",LogLevel.BASICLOG,"Invalid number of arguments provided for gameplayer");
             throw new InvalidCommand("Invalid arguments for gameplayer");
         }
         int i = 1;
 
-
-        while( i < l_commandSplit.length){
-            if(l_commandSplit[i].equalsIgnoreCase("add")){
-                l_allAddOperations.add(l_commandSplit[i+1]);
-            } else if(l_commandSplit[i].equalsIgnoreCase("remove")){
-                l_allRemoveOperations.add(l_commandSplit[i+1]);
+        try {
+            while (i < l_commandSplit.length) {
+                if (l_commandSplit[i].equalsIgnoreCase("add")) {
+                    l_allAddOperations.add(l_commandSplit[i + 1]);
+                } else if (l_commandSplit[i].equalsIgnoreCase("remove")) {
+                    l_allRemoveOperations.add(l_commandSplit[i + 1]);
+                } else {
+                    GameEngine.log("Command::handleAddAndRemovePlayer",LogLevel.BASICLOG,"Invalid argument provided for gameplayer operation");
+                    throw new InvalidCommand("");
+                }
+                i += 2;
             }
-            i += 1;
+        }catch(Exception l_e){
+            GameEngine.log("Command::handleAddAndRemovePlayer",LogLevel.BASICLOG,"Invalid argument provided for gameplayer operation");
+            throw new InvalidCommand("Invalid arguments provided for gameplayer operation.");
         }
         l_returnType.put("add",l_allAddOperations);
         l_returnType.put("remove",l_allRemoveOperations);
@@ -216,11 +294,20 @@ public class Command {
         String[] l_commandSplit = d_receivedCommand.split(" ");
         int i = 1;
         if(l_commandSplit.length != 3){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for deploy");
+            GameEngine.log("Command::handleDeployArmy",LogLevel.BASICLOG,"Invalid number of arguments provided for deploy");
             throw new InvalidCommand("Not a valid Deploy command.");
         } else {
-            l_returnArguments.add(l_commandSplit[1]);
-            l_returnArguments.add(l_commandSplit[2]);
+            try{
+                String l_arg;
+                for(int j = 1 ; j < 3 ; j++){
+                    l_arg = l_commandSplit[j];
+                    l_returnArguments.add(l_arg);
+                }
+                Integer l_tempInteger = Integer.parseInt(l_returnArguments.get(1));
+            } catch(Exception l_e){
+                GameEngine.log("Command::handleDeployArmy",LogLevel.BASICLOG,"Invalid arguments provided for deploy");
+                throw new InvalidCommand("Invalid arguments for airlift operation provided.");
+            }
         }
         return l_returnArguments;
     }
@@ -235,12 +322,20 @@ public class Command {
         String[] l_commandSplit = d_receivedCommand.split(" ");
         int i = 1;
         if(l_commandSplit.length != 4){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for advance");
+            GameEngine.log("Command::handleAdvanceArmies",LogLevel.BASICLOG,"Invalid number of arguments provided for advance");
             throw new InvalidCommand("Not a valid Deploy command.");
         } else {
-            l_returnArguments.add(l_commandSplit[1]);
-            l_returnArguments.add(l_commandSplit[2]);
-            l_returnArguments.add(l_commandSplit[3]);
+            try{
+                String l_arg;
+                for(int j = 1 ; j < 4 ; j++){
+                    l_arg = l_commandSplit[j];
+                    l_returnArguments.add(l_arg);
+                }
+                Integer l_tempInteger = Integer.parseInt(l_returnArguments.get(2));
+            } catch(Exception l_e){
+                GameEngine.log("Command::handleAdvanceArmies",LogLevel.BASICLOG,"Invalid arguments provided for advance");
+                throw new InvalidCommand("Invalid arguments for advance operation provided.");
+            }
         }
         return l_returnArguments;
     }
@@ -253,10 +348,14 @@ public class Command {
     public String handleBlockadeCommand() throws InvalidCommand{
         String[] l_commandSplit = d_receivedCommand.split(" ");
         if(l_commandSplit.length != 2) {
-            GameEngine.log("Command", LogLevel.BASICLOG,"Invalid number of arguments provided for blockade");
+            GameEngine.log("Command::handleBlockadeCommand", LogLevel.BASICLOG,"Invalid number of arguments provided for blockade");
             throw new InvalidCommand("Not a valid Blockade Command");
         } else {
-            return l_commandSplit[1];
+            if(l_commandSplit[1] != null){
+                return l_commandSplit[1];
+            } else {
+                throw new InvalidCommand("Invalid arguments provided for blockade operation.");
+            }
         }
 
     }
@@ -269,14 +368,22 @@ public class Command {
     public ArrayList<String> handleAirliftCommand() throws InvalidCommand{
         ArrayList<String> l_returnArguments = new ArrayList<>();
         String[] l_commandSplit = d_receivedCommand.split(" ");
-        int i = 1;
         if(l_commandSplit.length != 4){
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for airlift");
+            GameEngine.log("Command::handleAirliftCommand",LogLevel.BASICLOG,"Invalid number of arguments provided for airlift");
             throw new InvalidCommand("Not a valid airlift command.");
         } else{
-            l_returnArguments.add(l_commandSplit[1]);
-            l_returnArguments.add(l_commandSplit[2]);
-            l_returnArguments.add(l_commandSplit[3]);
+            try{
+                String l_arg;
+                for(int j = 1 ; j < 4 ; j++){
+                    l_arg = l_commandSplit[j];
+                    l_returnArguments.add(l_arg);
+                }
+                Integer l_tempInteger = Integer.parseInt(l_returnArguments.get(2));
+            } catch(Exception l_e){
+                GameEngine.log("Command::handleAirliftCommand",LogLevel.BASICLOG,"Invalid arguments provided for airlift");
+                throw new InvalidCommand("Invalid arguments for airlift operation provided.");
+            }
+
         }
         return l_returnArguments;
     }
@@ -290,10 +397,15 @@ public class Command {
         String[] l_commandSplit = d_receivedCommand.split(" ");
 
         if(l_commandSplit.length != 2) {
-            GameEngine.log("Command", LogLevel.BASICLOG,"Invalid number of arguments provided for bomb");
+            GameEngine.log("Command::handleBombCommand", LogLevel.BASICLOG,"Invalid number of arguments provided for bomb");
             throw new InvalidCommand("Not a valid Bomb Command");
         } else {
-            return l_commandSplit[1];
+            if(l_commandSplit[1] != null){
+                return l_commandSplit[1];
+            } else {
+                GameEngine.log("Command::handleBombCommand", LogLevel.BASICLOG,"Invalid arguments provided for bomb");
+                throw new InvalidCommand("Invalid arguments provided for bomb operation.");
+            }
         }
 
     }
@@ -306,10 +418,15 @@ public class Command {
     public String handleNegotiateCommand() throws InvalidCommand{
         String[] l_commandSplit = d_receivedCommand.split(" ");
         if(l_commandSplit.length > 2) {
-            GameEngine.log("Command",LogLevel.BASICLOG,"Invalid number of arguments provided for negotiate");
+            GameEngine.log("Command::handleNegotiateCommand",LogLevel.BASICLOG,"Invalid number of arguments provided for negotiate");
             throw new InvalidCommand("Not a valid Negotiate Command.");
         } else {
-            return l_commandSplit[1];
+            if(l_commandSplit[1] != null){
+                return l_commandSplit[1];
+            } else {
+                GameEngine.log("Command::handleNegotiateCommand",LogLevel.BASICLOG,"Invalid arguments provided for negotiate");
+                throw new InvalidCommand("Invalid arguments provided for negotiate operation.");
+            }
         }
     }
 }

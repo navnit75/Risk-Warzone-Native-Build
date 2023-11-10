@@ -1,6 +1,10 @@
 package org.Controller;
+
 import org.Constants.AllTheConstants;
-import org.Model.*;
+import org.Model.Continent;
+import org.Model.Country;
+import org.Model.GameState;
+import org.Model.Player;
 import org.Utils.LogLevel;
 import org.Views.MapView;
 
@@ -73,6 +77,10 @@ public class PlayerController {
                 System.out.println("Player " + p_name + " added.");
                 GameEngine.log("PlayerController::addRemovePlayers", LogLevel.BASICLOG,"Player " + p_name + " added.");
             }
+            else {
+                GameEngine.log("PlayerController::addRemovePlayers", LogLevel.BASICLOG,"Duplicate player name provided.");
+                System.out.println("Player " + p_name + " is already added. \nKindly add a different player !!!");
+            }
         }
 
         for(String p_name : l_allRemoveOperations){
@@ -137,29 +145,29 @@ public class PlayerController {
      * @param p_gameState : Current game state of the Game.
      */
     public void assignCountries(GameState p_gameState){
-       List<Country> l_countryList = new ArrayList<>(p_gameState.getCurrentMap().getAllCountriesAsList());
-       Collections.shuffle(l_countryList);
-       int l_countriesCount = l_countryList.size();
+        List<Country> l_countryList = new ArrayList<>(p_gameState.getCurrentMap().getAllCountriesAsList());
+        Collections.shuffle(l_countryList);
+        int l_countriesCount = l_countryList.size();
 
-       int l_countryIndex = 0 ;
-       while(l_countryIndex < l_countriesCount){
-           for(Player l_player : d_allPlayers){
-               if(l_countryIndex == l_countriesCount)
-                   break;
-               l_player.addCountryCaptured(l_countryList.get(l_countryIndex));
-               GameEngine.log("PlayerController::assignCountries",LogLevel.BASICLOG,
-                       l_player.getPlayerName() + "->" + l_countryList.get(l_countryIndex).getCountryName());
-               ++l_countryIndex;
-           }
+        int l_countryIndex = 0 ;
+        while(l_countryIndex < l_countriesCount){
+            for(Player l_player : d_allPlayers){
+                if(l_countryIndex == l_countriesCount)
+                    break;
+                l_player.addCountryCaptured(l_countryList.get(l_countryIndex));
+                GameEngine.log("PlayerController::assignCountries",LogLevel.BASICLOG,
+                        l_player.getPlayerName() + "->" + l_countryList.get(l_countryIndex).getCountryName());
+                ++l_countryIndex;
+            }
 
-       }
+        }
 
-       for(Player l_player : d_allPlayers){
-           updateContinents(l_player,p_gameState);
-       }
+        for(Player l_player : d_allPlayers){
+            updateContinents(l_player,p_gameState);
+        }
 
-       assignColors();
-       showPlayerAssignedCountry(p_gameState);
+        assignColors();
+        showPlayerAssignedCountry(p_gameState);
 
     }
 

@@ -316,9 +316,9 @@ public class Player {
             GameEngine.log("Player::createDeployOrder", LogLevel.BASICLOG,"Deploy order starting " +
                     "validation failed");
             GameEngine.log("Player::createDeployOrder", LogLevel.BASICLOG,"Num of Reinforcement" +
-                        " Player has " + this.getNumOfArmiesRemaining() + " Num of armies in the order : " + l_noOfArmies);
+                    " Player has " + this.getNumOfArmiesRemaining() + " Num of armies in the order : " + l_noOfArmies);
             System.out.println("Given deploy order cant be executed as armies in deploy order exceeds player's" +
-                        " unallocated armies.");
+                    " unallocated armies.");
             throw new InvalidState("You don't have enough Reinforcement for deployment to " + l_targetCountry);
         } else {
             Integer l_unallocatedarmies = d_numOfArmiesRemaining - l_noOfArmies;
@@ -337,25 +337,25 @@ public class Player {
      * Later executed in OrderExecutionPhase of the game.
      * @param l_cmd : Command object which contains the advance order string
      * @throws InvalidCommand : Throws InvalidCommand if the command provided by user is wrong
-    */
+     */
     public void createAdvanceOrder(Command l_cmd,GameState p_currentGameState) throws InvalidCommand {
-            Country l_sourceCountry = p_currentGameState.getCurrentMap().getCountryByName(l_cmd.handleAdvanceArmies().get(0));
-            Country l_defendingCountry = p_currentGameState.getCurrentMap().getCountryByName(l_cmd.handleAdvanceArmies().get(1));
-            Integer l_numOfArmies = Integer.parseInt(l_cmd.handleAdvanceArmies().get(2));
+        Country l_sourceCountry = p_currentGameState.getCurrentMap().getCountryByName(l_cmd.handleAdvanceArmies().get(0));
+        Country l_defendingCountry = p_currentGameState.getCurrentMap().getCountryByName(l_cmd.handleAdvanceArmies().get(1));
+        Integer l_numOfArmies = Integer.parseInt(l_cmd.handleAdvanceArmies().get(2));
 
-            boolean l_preValidityCheck = (l_sourceCountry != null) && (l_defendingCountry != null) &&
-                    (l_numOfArmies >= 0) && (l_sourceCountry.hasNeighbour(l_defendingCountry));
-            if (l_preValidityCheck) {
-                issue_order(new Advance(this, l_sourceCountry, l_defendingCountry, l_numOfArmies));
-                GameEngine.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order object" +
-                        " created and ready for execution" +
-                        " Advancing Armies  : " + l_numOfArmies +
-                        " From : " + l_sourceCountry.getCountryName() +
-                        " To : " + l_defendingCountry.getCountryName());
-            } else {
-                GameEngine.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order failed");
-                System.out.println("Invalid advance order provided");
-            }
+        boolean l_preValidityCheck = (l_sourceCountry != null) && (l_defendingCountry != null) &&
+                (l_numOfArmies >= 0) && (l_sourceCountry.hasNeighbour(l_defendingCountry));
+        if (l_preValidityCheck) {
+            issue_order(new Advance(this, l_sourceCountry, l_defendingCountry, l_numOfArmies));
+            GameEngine.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order object" +
+                    " created and ready for execution" +
+                    " Advancing Armies  : " + l_numOfArmies +
+                    " From : " + l_sourceCountry.getCountryName() +
+                    " To : " + l_defendingCountry.getCountryName());
+        } else {
+            GameEngine.log("Player::createAdvanceOrder", LogLevel.BASICLOG, "Advance order failed");
+            System.out.println("Invalid advance order provided");
+        }
     }
 
     /**
@@ -393,12 +393,12 @@ public class Player {
             this.d_cardsOwnedByPlayer.add(AllTheConstants.CARDS.get(l_cardIndex));
             GameEngine.log("Player::assignCard",LogLevel.BASICLOG,
                     this.d_playerName + " has been assigned " +
-                    "Card : " + AllTheConstants.CARDS.get(l_cardIndex));
+                            "Card : " + AllTheConstants.CARDS.get(l_cardIndex));
             setCardAssignedForThisTurnFlag(true);
         } else {
             GameEngine.log("Player::assignCard",LogLevel.BASICLOG,
                     this.d_playerName + " has CAPTURED but not assigned with card" +
-                    " as he has already been assigned card in this turn");
+                            " as he has already been assigned card in this turn");
         }
     }
 
@@ -507,8 +507,8 @@ public class Player {
             if(l_newCard.validateCommand(p_gameState)){
                 GameEngine.log("Player::createNegotiateOrderCard", LogLevel.BASICLOG,
                         " Negotiate order object created and ready for execution" +
-                        " Card Owner : " + p_player1.getPlayerName() +
-                        " Negotiated With : " + p_player2.getPlayerName());
+                                " Card Owner : " + p_player1.getPlayerName() +
+                                " Negotiated With : " + p_player2.getPlayerName());
                 issue_order(l_newCard);
             }
         }
@@ -524,8 +524,8 @@ public class Player {
     public void createCardOrder(Command l_cmd , GameState p_gameState) throws InvalidCommand, InvalidState{
         switch(l_cmd.getMainOperation()){
             case "airlift":{
-                    this.createAirliftOrderCard(l_cmd,p_gameState);
-                    break;
+                this.createAirliftOrderCard(l_cmd,p_gameState);
+                break;
             }
             case "blockade":{
                 this.createBlockadeOrderCard(l_cmd,p_gameState);
@@ -546,7 +546,6 @@ public class Player {
             }
         }
     }
-
 
 }
 

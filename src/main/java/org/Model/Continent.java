@@ -3,13 +3,14 @@ package org.Model;
 import org.Controller.GameEngine;
 import org.Exceptions.MapInvalidException;
 import org.Utils.LogLevel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class to handle the features related to continent as well its data members
  */
-public class Continent {
+public class Continent{
     /**
      * Id of the current continent
      */
@@ -46,7 +47,6 @@ public class Continent {
         this.d_continentName = p_continentName;
         this.d_continentBonusValue = p_continentBonusValue;
     }
-
     /**
      * Getter for the id of the continent
      * @return Integer

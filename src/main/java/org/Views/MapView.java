@@ -1,15 +1,11 @@
 package org.Views;
 
-import java.util.List;
-
-import org.davidmoten.text.utils.WordWrap;
 import org.Constants.AllTheConstants;
-import org.Exceptions.*;
-import org.Model.Continent;
-import org.Model.Country;
-import org.Model.GameState;
-import org.Model.Map;
-import org.Model.Player;
+import org.Exceptions.MapInvalidException;
+import org.Model.*;
+import org.davidmoten.text.utils.WordWrap;
+
+import java.util.List;
 
 /**
  * This is the MapView Class.
@@ -282,12 +278,8 @@ public class MapView {
                     for(Country l_country : l_countries) {
                         String l_formattedCountryName = getFormattedCountryName(l_countryIndex[0]++, l_country.getCountryName());
                         System.out.println(l_formattedCountryName);
-                        try {
-                            List<Country> l_neighbourCountries = d_map.getNeighbourCountries(l_country);
-                            renderFormattedNeighbourCountryName(l_country.getCountryName(), l_neighbourCountries);
-                        } catch (MapInvalidException l_invalidMap) {
-                            System.out.println(l_invalidMap.getMessage());
-                        }
+                        List<Country> l_neighbourCountries = d_map.getNeighbourCountries(l_country);
+                        renderFormattedNeighbourCountryName(l_country.getCountryName(), l_neighbourCountries);
                     }
                 } else {
                     System.out.println("No countries are present in the continent!");
