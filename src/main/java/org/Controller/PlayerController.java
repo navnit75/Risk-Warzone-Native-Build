@@ -121,6 +121,7 @@ public class PlayerController {
     private void assignColors(){
         if(this.d_allPlayers != null){
             int l_numOfColors = AllTheConstants.COLORS.size();
+            Collections.shuffle(AllTheConstants.COLORS);
             for(int i = 0 ; i < d_allPlayers.size() ; i++){
                 d_allPlayers.get(i).setColor(AllTheConstants.COLORS.get(i % l_numOfColors));
                 GameEngine.log("PlayerController::assignColors",LogLevel.BASICLOG,

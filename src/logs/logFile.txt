@@ -2,3 +2,278 @@
 ******************************************************************************************
                         [StartUpPhase : initPhase] :Start Up Phase                        
 ******************************************************************************************
+[StartUpPhase::initPhase] :Command Entered "loadmap europe.map"
+
+*********************[StartUpPhase::peformLoadMap] :MAP section starts*******************
+[Map::addContinent] :East_Europe added to the GameState.
+[Map::addContinent] :South_Europe added to the GameState.
+[Map::addContinent] :West_Europe added to the GameState.
+[Map::addCountry] :England added to the GameState
+[Map::addCountry] :Scotland added to the GameState
+[Map::addCountry] :N_Ireland added to the GameState
+[Map::addCountry] :Rep_Ireland added to the GameState
+[Map::addCountry] :Wales added to the GameState
+[Map::addCountry] :Belgum added to the GameState
+[Map::addCountry] :Netherlands added to the GameState
+[Map::addCountry] :Denmark added to the GameState
+[Map::addCountry] :Germany added to the GameState
+[Map::addCountry] :Poland added to the GameState
+[Map::addCountry] :Czech_Rep added to the GameState
+[Map::addCountry] :Slovakia added to the GameState
+[Map::addCountry] :Hungary added to the GameState
+[Map::addCountry] :Austria added to the GameState
+[Map::addCountry] :Switzerland added to the GameState
+[Map::addCountry] :Italy added to the GameState
+[Map::addCountry] :Sicily added to the GameState
+[Map::addCountry] :Sardinia added to the GameState
+[Map::addCountry] :Corsica added to the GameState
+[Map::addCountry] :Majorca added to the GameState
+[Map::addCountry] :France added to the GameState
+[Map::addCountry] :Spain added to the GameState
+[Map::addCountry] :Portugal added to the GameState
+[Map::addCountry] :Luxembourg added to the GameState
+[Map::addNeighbour] :Denmark is added as neighbour of England
+[Map::addNeighbour] :France is added as neighbour of England
+[Map::addNeighbour] :Belgum is added as neighbour of England
+[Map::addNeighbour] :Netherlands is added as neighbour of England
+[Map::addNeighbour] :Wales is added as neighbour of England
+[Map::addNeighbour] :Scotland is added as neighbour of England
+[Map::addNeighbour] :N_Ireland is added as neighbour of England
+[Map::addNeighbour] :Rep_Ireland is added as neighbour of England
+[Map::addNeighbour] :Denmark is added as neighbour of Scotland
+[Country::addNeighbour] :1 is already neighbour of Scotland
+[Country::addNeighbour] :2 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of Scotland
+[Map::addNeighbour] :N_Ireland is added as neighbour of Scotland
+[Country::addNeighbour] :1 is already neighbour of N_Ireland
+[Country::addNeighbour] :3 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of N_Ireland
+[Country::addNeighbour] :2 is already neighbour of N_Ireland
+[Country::addNeighbour] :3 is already neighbour of Scotland
+[Map::addNeighbour] :Scotland is added as neighbour of N_Ireland
+[Map::addNeighbour] :Spain is added as neighbour of Rep_Ireland
+[Country::addNeighbour] :1 is already neighbour of Rep_Ireland
+[Country::addNeighbour] :4 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of Rep_Ireland
+[Map::addNeighbour] :Wales is added as neighbour of Rep_Ireland
+[Country::addNeighbour] :1 is already neighbour of Wales
+[Country::addNeighbour] :5 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of Wales
+[Country::addNeighbour] :4 is already neighbour of Wales
+[Country::addNeighbour] :5 is already neighbour of Rep_Ireland
+[Map::addNeighbour] :Rep_Ireland is added as neighbour of Wales
+[Map::addNeighbour] :Germany is added as neighbour of Belgum
+[Map::addNeighbour] :France is added as neighbour of Belgum
+[Map::addNeighbour] :Luxembourg is added as neighbour of Belgum
+[Map::addNeighbour] :Netherlands is added as neighbour of Belgum
+[Country::addNeighbour] :1 is already neighbour of Belgum
+[Country::addNeighbour] :6 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of Belgum
+[Map::addNeighbour] :Germany is added as neighbour of Netherlands
+[Country::addNeighbour] :6 is already neighbour of Netherlands
+[Country::addNeighbour] :7 is already neighbour of Belgum
+[Map::addNeighbour] :Belgum is added as neighbour of Netherlands
+[Country::addNeighbour] :1 is already neighbour of Netherlands
+[Country::addNeighbour] :7 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of Netherlands
+[Map::addNeighbour] :Poland is added as neighbour of Denmark
+[Map::addNeighbour] :Germany is added as neighbour of Denmark
+[Country::addNeighbour] :2 is already neighbour of Denmark
+[Country::addNeighbour] :8 is already neighbour of Scotland
+[Map::addNeighbour] :Scotland is added as neighbour of Denmark
+[Country::addNeighbour] :1 is already neighbour of Denmark
+[Country::addNeighbour] :8 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of Denmark
+[Map::addNeighbour] :Switzerland is added as neighbour of Germany
+[Map::addNeighbour] :Austria is added as neighbour of Germany
+[Map::addNeighbour] :Czech_Rep is added as neighbour of Germany
+[Map::addNeighbour] :Poland is added as neighbour of Germany
+[Country::addNeighbour] :8 is already neighbour of Germany
+[Country::addNeighbour] :9 is already neighbour of Denmark
+[Map::addNeighbour] :Denmark is added as neighbour of Germany
+[Country::addNeighbour] :7 is already neighbour of Germany
+[Country::addNeighbour] :9 is already neighbour of Netherlands
+[Map::addNeighbour] :Netherlands is added as neighbour of Germany
+[Country::addNeighbour] :6 is already neighbour of Germany
+[Country::addNeighbour] :9 is already neighbour of Belgum
+[Map::addNeighbour] :Belgum is added as neighbour of Germany
+[Map::addNeighbour] :Luxembourg is added as neighbour of Germany
+[Map::addNeighbour] :Slovakia is added as neighbour of Poland
+[Map::addNeighbour] :Czech_Rep is added as neighbour of Poland
+[Country::addNeighbour] :8 is already neighbour of Poland
+[Country::addNeighbour] :10 is already neighbour of Denmark
+[Map::addNeighbour] :Denmark is added as neighbour of Poland
+[Country::addNeighbour] :9 is already neighbour of Poland
+[Country::addNeighbour] :10 is already neighbour of Germany
+[Map::addNeighbour] :Germany is added as neighbour of Poland
+[Map::addNeighbour] :Austria is added as neighbour of Czech_Rep
+[Map::addNeighbour] :Slovakia is added as neighbour of Czech_Rep
+[Country::addNeighbour] :9 is already neighbour of Czech_Rep
+[Country::addNeighbour] :11 is already neighbour of Germany
+[Map::addNeighbour] :Germany is added as neighbour of Czech_Rep
+[Country::addNeighbour] :10 is already neighbour of Czech_Rep
+[Country::addNeighbour] :11 is already neighbour of Poland
+[Map::addNeighbour] :Poland is added as neighbour of Czech_Rep
+[Map::addNeighbour] :Austria is added as neighbour of Slovakia
+[Map::addNeighbour] :Hungary is added as neighbour of Slovakia
+[Country::addNeighbour] :10 is already neighbour of Slovakia
+[Country::addNeighbour] :12 is already neighbour of Poland
+[Map::addNeighbour] :Poland is added as neighbour of Slovakia
+[Country::addNeighbour] :11 is already neighbour of Slovakia
+[Country::addNeighbour] :12 is already neighbour of Czech_Rep
+[Map::addNeighbour] :Czech_Rep is added as neighbour of Slovakia
+[Map::addNeighbour] :Austria is added as neighbour of Hungary
+[Country::addNeighbour] :12 is already neighbour of Hungary
+[Country::addNeighbour] :13 is already neighbour of Slovakia
+[Map::addNeighbour] :Slovakia is added as neighbour of Hungary
+[Map::addNeighbour] :Italy is added as neighbour of Austria
+[Map::addNeighbour] :Switzerland is added as neighbour of Austria
+[Country::addNeighbour] :13 is already neighbour of Austria
+[Country::addNeighbour] :14 is already neighbour of Hungary
+[Map::addNeighbour] :Hungary is added as neighbour of Austria
+[Country::addNeighbour] :9 is already neighbour of Austria
+[Country::addNeighbour] :14 is already neighbour of Germany
+[Map::addNeighbour] :Germany is added as neighbour of Austria
+[Country::addNeighbour] :11 is already neighbour of Austria
+[Country::addNeighbour] :14 is already neighbour of Czech_Rep
+[Map::addNeighbour] :Czech_Rep is added as neighbour of Austria
+[Country::addNeighbour] :12 is already neighbour of Austria
+[Country::addNeighbour] :14 is already neighbour of Slovakia
+[Map::addNeighbour] :Slovakia is added as neighbour of Austria
+[Map::addNeighbour] :Italy is added as neighbour of Switzerland
+[Country::addNeighbour] :14 is already neighbour of Switzerland
+[Country::addNeighbour] :15 is already neighbour of Austria
+[Map::addNeighbour] :Austria is added as neighbour of Switzerland
+[Country::addNeighbour] :9 is already neighbour of Switzerland
+[Country::addNeighbour] :15 is already neighbour of Germany
+[Map::addNeighbour] :Germany is added as neighbour of Switzerland
+[Map::addNeighbour] :France is added as neighbour of Switzerland
+[Map::addNeighbour] :Sardinia is added as neighbour of Italy
+[Map::addNeighbour] :Sicily is added as neighbour of Italy
+[Country::addNeighbour] :15 is already neighbour of Italy
+[Country::addNeighbour] :16 is already neighbour of Switzerland
+[Map::addNeighbour] :Switzerland is added as neighbour of Italy
+[Country::addNeighbour] :14 is already neighbour of Italy
+[Country::addNeighbour] :16 is already neighbour of Austria
+[Map::addNeighbour] :Austria is added as neighbour of Italy
+[Map::addNeighbour] :Sardinia is added as neighbour of Sicily
+[Country::addNeighbour] :16 is already neighbour of Sicily
+[Country::addNeighbour] :17 is already neighbour of Italy
+[Map::addNeighbour] :Italy is added as neighbour of Sicily
+[Map::addNeighbour] :Majorca is added as neighbour of Sardinia
+[Country::addNeighbour] :17 is already neighbour of Sardinia
+[Country::addNeighbour] :18 is already neighbour of Sicily
+[Map::addNeighbour] :Sicily is added as neighbour of Sardinia
+[Map::addNeighbour] :Corsica is added as neighbour of Sardinia
+[Country::addNeighbour] :16 is already neighbour of Sardinia
+[Country::addNeighbour] :18 is already neighbour of Italy
+[Map::addNeighbour] :Italy is added as neighbour of Sardinia
+[Map::addNeighbour] :Majorca is added as neighbour of Corsica
+[Country::addNeighbour] :18 is already neighbour of Corsica
+[Country::addNeighbour] :19 is already neighbour of Sardinia
+[Map::addNeighbour] :Sardinia is added as neighbour of Corsica
+[Map::addNeighbour] :Spain is added as neighbour of Majorca
+[Country::addNeighbour] :19 is already neighbour of Majorca
+[Country::addNeighbour] :20 is already neighbour of Corsica
+[Map::addNeighbour] :Corsica is added as neighbour of Majorca
+[Country::addNeighbour] :18 is already neighbour of Majorca
+[Country::addNeighbour] :20 is already neighbour of Sardinia
+[Map::addNeighbour] :Sardinia is added as neighbour of Majorca
+[Map::addNeighbour] :Spain is added as neighbour of France
+[Country::addNeighbour] :15 is already neighbour of France
+[Country::addNeighbour] :21 is already neighbour of Switzerland
+[Map::addNeighbour] :Switzerland is added as neighbour of France
+[Map::addNeighbour] :Luxembourg is added as neighbour of France
+[Country::addNeighbour] :6 is already neighbour of France
+[Country::addNeighbour] :21 is already neighbour of Belgum
+[Map::addNeighbour] :Belgum is added as neighbour of France
+[Country::addNeighbour] :1 is already neighbour of France
+[Country::addNeighbour] :21 is already neighbour of England
+[Map::addNeighbour] :England is added as neighbour of France
+[Map::addNeighbour] :Portugal is added as neighbour of Spain
+[Country::addNeighbour] :4 is already neighbour of Spain
+[Country::addNeighbour] :22 is already neighbour of Rep_Ireland
+[Map::addNeighbour] :Rep_Ireland is added as neighbour of Spain
+[Country::addNeighbour] :20 is already neighbour of Spain
+[Country::addNeighbour] :22 is already neighbour of Majorca
+[Map::addNeighbour] :Majorca is added as neighbour of Spain
+[Country::addNeighbour] :21 is already neighbour of Spain
+[Country::addNeighbour] :22 is already neighbour of France
+[Map::addNeighbour] :France is added as neighbour of Spain
+[Country::addNeighbour] :22 is already neighbour of Portugal
+[Country::addNeighbour] :23 is already neighbour of Spain
+[Map::addNeighbour] :Spain is added as neighbour of Portugal
+[Country::addNeighbour] :9 is already neighbour of Luxembourg
+[Country::addNeighbour] :24 is already neighbour of Germany
+[Map::addNeighbour] :Germany is added as neighbour of Luxembourg
+[Country::addNeighbour] :21 is already neighbour of Luxembourg
+[Country::addNeighbour] :24 is already neighbour of France
+[Map::addNeighbour] :France is added as neighbour of Luxembourg
+[Country::addNeighbour] :6 is already neighbour of Luxembourg
+[Country::addNeighbour] :24 is already neighbour of Belgum
+[Map::addNeighbour] :Belgum is added as neighbour of Luxembourg
+[Map::loadmap] :Map is loaded successfully.
+[StartUpPhase::initPhase] :Command Entered "showmap"
+[StartUpPhase::initPhase] :Command Entered "gameplayer -add p1 -add p2"
+
+****************[StartUpPhase::performCreatePlayers] :Player Section Starts**************
+[PlayerController::addRemovePlayers] :Player p1 added.
+[PlayerController::addRemovePlayers] :Player p2 added.
+[StartUpPhase::initPhase] :Command Entered "assigncountries"
+[Player::addCountryCaptured] :p1 --CAPTURED--> Corsica
+[PlayerController::assignCountries] :p1->Corsica
+[Player::addCountryCaptured] :p2 --CAPTURED--> Austria
+[PlayerController::assignCountries] :p2->Austria
+[Player::addCountryCaptured] :p1 --CAPTURED--> Scotland
+[PlayerController::assignCountries] :p1->Scotland
+[Player::addCountryCaptured] :p2 --CAPTURED--> Rep_Ireland
+[PlayerController::assignCountries] :p2->Rep_Ireland
+[Player::addCountryCaptured] :p1 --CAPTURED--> Slovakia
+[PlayerController::assignCountries] :p1->Slovakia
+[Player::addCountryCaptured] :p2 --CAPTURED--> Netherlands
+[PlayerController::assignCountries] :p2->Netherlands
+[Player::addCountryCaptured] :p1 --CAPTURED--> Luxembourg
+[PlayerController::assignCountries] :p1->Luxembourg
+[Player::addCountryCaptured] :p2 --CAPTURED--> Belgum
+[PlayerController::assignCountries] :p2->Belgum
+[Player::addCountryCaptured] :p1 --CAPTURED--> Italy
+[PlayerController::assignCountries] :p1->Italy
+[Player::addCountryCaptured] :p2 --CAPTURED--> Spain
+[PlayerController::assignCountries] :p2->Spain
+[Player::addCountryCaptured] :p1 --CAPTURED--> Hungary
+[PlayerController::assignCountries] :p1->Hungary
+[Player::addCountryCaptured] :p2 --CAPTURED--> Switzerland
+[PlayerController::assignCountries] :p2->Switzerland
+[Player::addCountryCaptured] :p1 --CAPTURED--> Sardinia
+[PlayerController::assignCountries] :p1->Sardinia
+[Player::addCountryCaptured] :p2 --CAPTURED--> France
+[PlayerController::assignCountries] :p2->France
+[Player::addCountryCaptured] :p1 --CAPTURED--> England
+[PlayerController::assignCountries] :p1->England
+[Player::addCountryCaptured] :p2 --CAPTURED--> Wales
+[PlayerController::assignCountries] :p2->Wales
+[Player::addCountryCaptured] :p1 --CAPTURED--> Sicily
+[PlayerController::assignCountries] :p1->Sicily
+[Player::addCountryCaptured] :p2 --CAPTURED--> Denmark
+[PlayerController::assignCountries] :p2->Denmark
+[Player::addCountryCaptured] :p1 --CAPTURED--> Majorca
+[PlayerController::assignCountries] :p1->Majorca
+[Player::addCountryCaptured] :p2 --CAPTURED--> Germany
+[PlayerController::assignCountries] :p2->Germany
+[Player::addCountryCaptured] :p1 --CAPTURED--> Poland
+[PlayerController::assignCountries] :p1->Poland
+[Player::addCountryCaptured] :p2 --CAPTURED--> N_Ireland
+[PlayerController::assignCountries] :p2->N_Ireland
+[Player::addCountryCaptured] :p1 --CAPTURED--> Portugal
+[PlayerController::assignCountries] :p1->Portugal
+[Player::addCountryCaptured] :p2 --CAPTURED--> Czech_Rep
+[PlayerController::assignCountries] :p2->Czech_Rep
+[PlayerController::assignColors] :p1 is assigned color : [0;32m
+[PlayerController::assignColors] :p2 is assigned color : [0;33m
+[PlayerController::calculateArmiesForPlayer] :p1 has been assigned 4
+[PlayerController::calculateArmiesForPlayer] :p2 has been assigned 4
+[StartUpPhase::performAssignCountries] : changing the phase to Issue Orde Phase
+
+******************************************************************************************
+                     [IssueOrderPhase::initPhase] :Issue Order Phase                      
+******************************************************************************************
